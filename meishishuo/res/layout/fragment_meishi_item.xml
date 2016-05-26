@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:padding="5dp"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/item_meishi_imageview"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:scaleType="center"
+        android:src="@drawable/loading" />
+
+    <TextView
+        android:id="@+id/item_meishi_textview_name"
+        style="@style/meishi_text_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/item_meishi_textview_keywords"
+        style="@style/meishi_text_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+       	android:textSize="16sp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+         >
+
+        <TextView
+            android:id="@+id/item_meishi_textview_count"
+            style="@style/meishi_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/history_see"
+            android:layout_alignParentLeft="true"
+            android:drawableLeft="@drawable/history_see"
+            android:textSize="13sp"
+            />
+
+        <TextView
+            android:id="@+id/item_meishi_textview_collect"
+            style="@style/meishi_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/Menu_Collect"
+            android:layout_alignParentRight="true"
+            android:drawableLeft="@drawable/item_like"
+            android:textSize="13sp"/>
+		
+    </RelativeLayout>
+</LinearLayout>

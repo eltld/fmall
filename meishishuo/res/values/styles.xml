@@ -1,0 +1,64 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+	<style name="AppBaseTheme" parent="android:Theme.Holo.Light">
+	</style>
+	
+    <style name="AppTheme" parent="AppBaseTheme">
+  		 <item name="android:actionBarStyle">@style/actionbar_style</item>  
+    </style>
+    
+	<style name="actionbar_style" parent="@android:style/Widget.Holo.Light.ActionBar">  
+        <item name="android:displayOptions">showHome|showTitle</item>
+        <item name="android:background">#d6cfce</item>
+        <item name="android:textSize">18sp</item>  
+        <item name="android:textColor">#000000</item>       
+    </style> 
+ 
+    <style name="drawer_background_style">
+        <item name="android:background">#ffffff</item>
+    </style>
+    <style name="drawer_text_style">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="meishi_background_style">
+        <item name="android:background">#d6cfce</item>
+    </style>
+    <style name="meishi_text_style">
+        <item name="android:textColor">#000000</item>
+    </style>
+   
+     <style name="myRadioGroupStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:button">@null</item>
+        <item name="android:singleLine">true</item>
+    </style>
+  
+    <style name="MyDialog" parent="android:style/Theme.Dialog"> 
+        <item name="android:windowFrame">@null</item>
+        <item name="android:background">#ffffff</item>  
+ 		<item name="android:windowBackground">@android:color/transparent</item> 
+        <item name="android:windowNoTitle">true</item>  
+        <item name="android:windowIsFloating">true</item>  
+    </style> 
+  	<style name="ThemeActivity" parent="AppTheme">
+	    <item name="android:windowAnimationStyle">@style/AnimationActivity</item>
+	   
+	</style>
+  	<style name="AnimationActivity" parent="@android:style/Animation.Activity">
+	      <item name="android:activityOpenEnterAnimation">@anim/in_from_right</item>
+	      <item name="android:activityOpenExitAnimation">@anim/out_to_left</item>
+	      <item name="android:activityCloseEnterAnimation">@anim/in_from_left</item>
+	      <item name="android:activityCloseExitAnimation">@anim/out_to_right</item>
+  	</style>
+</resources>
