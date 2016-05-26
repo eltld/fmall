@@ -85,6 +85,7 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
 		leftListView=(ListView)leftDrawerLayout.findViewById(R.id.left_listview);
 		//初始化左菜单数据
 		List<LeftMenu> menuItemList=new ArrayList<LeftMenu>();
+		menuItemList.add(new LeftMenu(R.drawable.menu_message, this.getString(R.string.LeftMenu_Message)));
 		menuItemList.add(new LeftMenu(R.drawable.menu_classify, this.getString(R.string.LeftMenu_Classify)));
 		menuItemList.add(new LeftMenu(R.drawable.menu_collection,this.getString(R.string.LeftMenu_MyCollection)));
 		menuItemList.add(new LeftMenu(R.drawable.menu_theme, this.getString(R.string.LeftMenu_Theme)));
@@ -155,47 +156,6 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();  
  	    inflater.inflate(R.menu.menu_main, menu);
- 	    MenuItem searchItem=menu.findItem(R.id.menu_search);
- 	    searchView=(SearchView) searchItem.getActionView();
- 	    searchView.setQueryHint("输入菜谱名搜索");
- 	    searchView.setSubmitButtonEnabled(true);//显示确认搜索按钮
- 	    //searchview搜索事件的监听
-        searchView.setOnQueryTextListener(new OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                 //当点击搜索按钮,输入法搜索按钮,会触发这个方法.在这里做相应的搜索事件,query为用户输入的值
-                 //当输入框为空或者""时,此方法没有被调用
-                	
-                	/*Intent intent=new Intent(MainActivity.this,DetailActivity.class);
-                	intent.putExtra("search_content", query);
-    				startActivity(intent);*/
-                	Toast.makeText(MainActivity.this, query, Toast.LENGTH_SHORT).show();
-                	return true;
-                }
-                @Override
-                public boolean onQueryTextChange(String newText) {
-                 //当输入的文字发生变化的时候,会触发这个方法.在这里做匹配提示的操作等
-                	
-                	return true;
-                }
-        });
-        //searchview展开关闭事件监听
-        searchItem.setOnActionExpandListener(new OnActionExpandListener() {
-			
-			@Override
-			public boolean onMenuItemActionExpand(MenuItem item) {
-				//展开
-				return true;
-			}
-			
-			@Override
-			public boolean onMenuItemActionCollapse(MenuItem item) {
-				//关闭
-				
-				return true;
-			}
-		});
-
 		return super.onCreateOptionsMenu(menu);
 	}
     //处理抽屉的打开关闭效果
@@ -203,6 +163,12 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
     public boolean onOptionsItemSelected(MenuItem item) {  
         if (mDrawerToggle.onOptionsItemSelected(item)) {
           return true;
+        }
+        switch(item.getItemId()){
+        	case R.id.menu_search:
+        		//搜索
+        		Intent intent=new Intent(MainActivity.this,SearchActivity.class);
+        		startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }  
@@ -212,23 +178,27 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		// 
 		switch(position){
-			case 0://分类
-				Intent intent0=new Intent(MainActivity.this,ClassifyActivity.class);
+			case 0://我的消息
+				Intent intent0=new Intent(MainActivity.this,MessageActivity.class);
 				startActivity(intent0);
-				break;
-				
-			case 1://我的收藏
-				Intent intent1=new Intent(MainActivity.this,CollectionActivity.class);
+			break;
+			case 1://分类
+				Intent intent1=new Intent(MainActivity.this,ClassifyActivity.class);
 				startActivity(intent1);
 				break;
-			case 2://主题换肤
+				
+			case 2://我的收藏
+				Intent intent2=new Intent(MainActivity.this,CollectionActivity.class);
+				startActivity(intent2);
+				break;
+			case 3://主题换肤
 				Toast.makeText(MainActivity.this, "敬请期待. . .",Toast.LENGTH_SHORT).show();
 				break;
-			case 3://设置
-				Intent intent3=new Intent(MainActivity.this,SettingsActivity.class);
-				startActivity(intent3);
+			case 4://设置
+				Intent intent4=new Intent(MainActivity.this,SettingsActivity.class);
+				startActivity(intent4);
 				break;
-			case 4://退出
+			case 5://退出
 				showExitDialog();
 				break;
 		}

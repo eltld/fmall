@@ -41,7 +41,7 @@ public class MainFragment extends Fragment implements OnItemClickListener{
 	private LinearLayout mBottomView;// 显示下方圆圈的容器（线性布局）
 	private HeaderGridView mHeadGridView;
 	private List<MeiShi> resultList;
-	private String httpArg="id=0&rows=10&page=1";
+	private String httpArg="id=0&rows=8&page=1";
 	private int[] imgIds = new int[] { R.drawable.meishi_jiaozi, R.drawable.meishi_kongxincai, R.drawable.meishi_nuomijuan,R.drawable.meishi_tudousi};
 	public ImageView[] imgViews = new ImageView[imgIds.length];//下方圆点的个数
 	

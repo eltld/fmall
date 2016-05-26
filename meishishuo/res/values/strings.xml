@@ -19,5 +19,6 @@
     <string name="settings_image">无图模式</string>
     <string name="history_see">浏览次数</string>
     <string name="load">正在加载 . . .</string>
+    <string name="LeftMenu_Message">我的消息</string>
 
 </resources>

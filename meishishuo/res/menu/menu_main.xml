@@ -5,8 +5,7 @@
           android:title="@string/Menu_Search"  
           android:orderInCategory="90"
           android:icon="@drawable/search"  
-          android:showAsAction="always|collapseActionView" 
-          android:actionViewClass="android.widget.SearchView"
+          android:showAsAction="always"         
           />
 	
 </menu>

@@ -9,7 +9,7 @@ public class Constants {
 	//菜谱列表，也可以用分类id作为参数
 	public static final String listUrl="http://www.tngou.net/api/cook/list";
 	//菜谱信息，通过name取得菜谱详情
-	public static final String nameUrl="www.tngou.net/api/cook/name";	
+	public static final String nameUrl="http://www.tngou.net/api/cook/name";	
 	//图片路径
 	public static final String imageUrl="http://tnfs.tngou.net/image";
 	//图片尺寸
