@@ -29,7 +29,10 @@ public class ClassifyActivity extends FragmentActivity{
 	public void initView(){
 		
 		actionBar=getActionBar();
+		//向上导航
 		actionBar.setDisplayHomeAsUpEnabled(true);
+		//显示icon图标,才能设置返回图标
+		actionBar.setDisplayShowHomeEnabled(true);
 		actionBar.setTitle("健康食谱分类");
 		FragmentTransaction beginTransaction=getSupportFragmentManager().beginTransaction();
 		ClassifyFragment fragment=new ClassifyFragment();

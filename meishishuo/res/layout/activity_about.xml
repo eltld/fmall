@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f1f1f1"
+    android:background="@color/background"
     android:orientation="vertical" >
 
     <TextView
@@ -11,7 +11,7 @@
         android:layout_marginTop="20dp"
         android:padding="5dp"
         android:layout_gravity="center_horizontal"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:singleLine="true"
         android:drawableTop="@drawable/ic_launcher" 
         android:textSize="16sp"
@@ -21,9 +21,8 @@
         android:id="@+id/about_rl_team"
 	     android:layout_width="match_parent"
 	     android:layout_height="wrap_content"
-	     android:background="#ffffff"
+	     android:background="@drawable/mid_layout_selector"
 	     android:layout_marginTop="20dp"
-
 	     
 	    >
 	    <TextView
@@ -53,7 +52,7 @@
 	    android:id="@+id/about_rl_data"
 	     android:layout_width="match_parent"
 	     android:layout_height="wrap_content"
-	     android:background="#ffffff"
+	     android:background="@drawable/mid_layout_selector"
 	     android:layout_marginTop="5dp"
 
 	    >
@@ -84,7 +83,7 @@
 	     android:id="@+id/about_rl_version"
 	     android:layout_width="match_parent"
 	     android:layout_height="wrap_content"
-	     android:background="#ffffff"
+	     android:background="@drawable/mid_layout_selector"
 	     android:layout_marginTop="5dp"
 
 	    >
@@ -108,7 +107,7 @@
 	    	android:layout_alignParentRight="true"
 	    	android:layout_marginRight="0dp"
 	        android:textSize="14sp"
-	  		android:text="1.160516"
+	  		android:text="1.160527"
 	         />
 	</RelativeLayout>
 </LinearLayout>

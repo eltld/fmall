@@ -30,6 +30,8 @@ import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListene
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -45,6 +47,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -57,13 +61,13 @@ import android.widget.Toast;
  * @author zhoufeng06@qq.com
  * @time 2016年4月22日-下午2:27:36
  */
-public class DetailActivity extends Activity {
+public class DetailActivity extends Activity implements OnItemClickListener{
 	private ActionBar actionBar;
-	private ViewPager viewpager;
-	private WebView mWebView;
-	private ListView commentListView;
+	private ViewPager viewpager;//包含详情和评论
+	private WebView mWebView;//加载详情内容
+	private ListView commentListView;//评论
 	private RadioGroup rg_mid;
-	private RadioButton rb_detail,rb_comment;
+	private RadioButton rb_detail,rb_comment;//详情和评论标签
 	private ImageView meishiImage,send;
 	private List<View> viewList ;
 	private List<Comment> commentList;
@@ -72,7 +76,7 @@ public class DetailActivity extends Activity {
 	private MeiShiDao dao;
 	private CommentDao commentdao;
 	private MeiShi meishi;
-	private DisplayImageOptions options;
+	private DisplayImageOptions options;//imageloader选项
 	private boolean noImage=false;//无图模式
 	private String httpArg="id=";//请求参数
 	private String id=null;
@@ -101,11 +105,15 @@ public class DetailActivity extends Activity {
 			Toast.makeText(DetailActivity.this, "网络不可用！", Toast.LENGTH_SHORT).show();
 		}
 	}
+	@SuppressWarnings("deprecation")
 	public void initView(){
 		dao=new MeiShiDao(DetailActivity.this,MeiShiDao.DATABASE_NAME);
 		commentdao=new CommentDao(DetailActivity.this, CommentDao.DATABASE_NAME);
 		actionBar=getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
+		//不显示图标
+		actionBar.setDisplayShowHomeEnabled(true);
+		actionBar.setTitle("详情");
 		//
 		viewpager=(ViewPager) findViewById(R.id.viewpager_content);
 		meishiImage=(ImageView) findViewById(R.id.detail_imageView_meishi);
@@ -125,7 +133,7 @@ public class DetailActivity extends Activity {
 		commentList=commentdao.queryAll(commentdao.COMMENTS_TABLE);
 		commentAdapter=new CommentAdapter(DetailActivity.this, commentList);
 		commentListView.setAdapter(commentAdapter);
-
+		commentListView.setOnItemClickListener(this);
 			final SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 			//评论按钮点击事件监听
 			send.setOnClickListener(new OnClickListener() {
@@ -145,6 +153,7 @@ public class DetailActivity extends Activity {
 						commentList.add(com);
 						commentdao.insert(com);
 						commentAdapter.notifyDataSetChanged();
+						et_comment.setText("");
 					}else{
 						Toast.makeText(DetailActivity.this, "输入内容不能为空！", Toast.LENGTH_SHORT).show();
 					}
@@ -224,6 +233,25 @@ public class DetailActivity extends Activity {
 				 }
 			}
 		});
+	}
+	//评论列表点击操作
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		//
+		
+		new  AlertDialog.Builder(DetailActivity.this)                   
+		.setItems(new  String[] {"回复", "举报" }, 
+		  new  DialogInterface.OnClickListener() {  
+			public void onClick(DialogInterface dialog, int which) {
+				if(which==0){
+					Toast.makeText(DetailActivity.this, "敬请期待. . .", Toast.LENGTH_SHORT).show();
+				}else if(which==1){
+					Toast.makeText(DetailActivity.this, "敬请期待. . .", Toast.LENGTH_SHORT).show();
+				}
+			}
+		}	
+		).show();
+
 	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -344,4 +372,5 @@ public class DetailActivity extends Activity {
 		    return item;
 		}
 	}
+	
 }

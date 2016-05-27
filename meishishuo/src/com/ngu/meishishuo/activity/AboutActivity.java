@@ -26,6 +26,8 @@ public class AboutActivity extends Activity {
 		setContentView(R.layout.activity_about);
 		actionBar=getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
+		//显示图标
+		actionBar.setDisplayShowHomeEnabled(true);
 		actionBar.setTitle("关于");
 		rl_team=(RelativeLayout) findViewById(R.id.about_rl_team);
 		rl_version=(RelativeLayout) findViewById(R.id.about_rl_version);

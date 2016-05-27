@@ -16,199 +16,229 @@ public final class R {
     }
     public static final class attr {
     }
+    public static final class color {
+        public static final int black=0x7f050001;
+        public static final int blue=0x7f050003;
+        /**  设置页面描边颜色 
+         */
+        public static final int border_clo=0x7f050000;
+        /**  文字颜色 
+         */
+        public static final int white=0x7f050002;
+    }
     public static final class drawable {
-        public static final int btn_selector=0x7f020000;
-        public static final int circle_choosed=0x7f020001;
-        public static final int circle_unchoosed=0x7f020002;
-        public static final int clear_cache=0x7f020003;
-        public static final int collection_item_background=0x7f020004;
-        public static final int color_normal=0x7f020005;
-        public static final int color_pressed=0x7f020006;
-        public static final int history_see=0x7f020007;
-        public static final int ic_drawer=0x7f020008;
-        public static final int ic_launcher=0x7f020009;
-        public static final int item_like=0x7f02000a;
-        public static final int loading=0x7f02000b;
-        public static final int mail=0x7f02000c;
-        public static final int meishi_jiaozi=0x7f02000d;
-        public static final int meishi_kongxincai=0x7f02000e;
-        public static final int meishi_nuomijuan=0x7f02000f;
-        public static final int meishi_tudousi=0x7f020010;
-        public static final int menu_classify=0x7f020011;
-        public static final int menu_collection=0x7f020012;
-        public static final int menu_delete=0x7f020013;
-        public static final int menu_exit=0x7f020014;
-        public static final int menu_head=0x7f020015;
-        public static final int menu_info=0x7f020016;
-        public static final int menu_message=0x7f020017;
-        public static final int menu_setting=0x7f020018;
-        public static final int menu_theme=0x7f020019;
-        public static final int myhead=0x7f02001a;
-        public static final int no_image=0x7f02001b;
-        public static final int pass=0x7f02001c;
-        public static final int radiobutton_selector=0x7f02001d;
-        public static final int search=0x7f02001e;
-        public static final int selector_toggle_button=0x7f02001f;
-        public static final int send=0x7f020020;
-        public static final int toggle_off=0x7f020021;
-        public static final int toggle_on=0x7f020022;
-        public static final int unhappy=0x7f020023;
-        public static final int user=0x7f020024;
-        public static final int welcome=0x7f020025;
+        public static final int bg_layout_shape=0x7f020000;
+        public static final int bottom_layout_selector=0x7f020001;
+        public static final int bottom_select=0x7f020002;
+        public static final int bottom_unselect=0x7f020003;
+        public static final int btn_selector=0x7f020004;
+        public static final int checkbox=0x7f020005;
+        public static final int checkbox_agree_selector=0x7f020006;
+        public static final int checkbox_uncheck=0x7f020007;
+        public static final int circle_choosed=0x7f020008;
+        public static final int circle_unchoosed=0x7f020009;
+        public static final int clear_cache=0x7f02000a;
+        public static final int collection_item_background=0x7f02000b;
+        public static final int color_normal=0x7f02000c;
+        public static final int color_pressed=0x7f02000d;
+        public static final int history_see=0x7f02000e;
+        public static final int ic_drawer=0x7f02000f;
+        public static final int ic_launcher=0x7f020010;
+        public static final int item_like=0x7f020011;
+        public static final int loading=0x7f020012;
+        public static final int mail=0x7f020013;
+        public static final int meishi_jiaozi=0x7f020014;
+        public static final int meishi_kongxincai=0x7f020015;
+        public static final int meishi_nuomijuan=0x7f020016;
+        public static final int meishi_tudousi=0x7f020017;
+        public static final int menu_back=0x7f020018;
+        public static final int menu_classify=0x7f020019;
+        public static final int menu_collection=0x7f02001a;
+        public static final int menu_delete=0x7f02001b;
+        public static final int menu_exit=0x7f02001c;
+        public static final int menu_head=0x7f02001d;
+        public static final int menu_info=0x7f02001e;
+        public static final int menu_item_selector=0x7f02001f;
+        public static final int menu_message=0x7f020020;
+        public static final int menu_setting=0x7f020021;
+        public static final int menu_theme=0x7f020022;
+        public static final int mid_layout_selector=0x7f020023;
+        public static final int myhead=0x7f020024;
+        public static final int pass=0x7f020025;
+        public static final int radiobutton_selector=0x7f020026;
+        public static final int search=0x7f020027;
+        public static final int selector_toggle_button=0x7f020028;
+        public static final int send=0x7f020029;
+        public static final int setting_arrow=0x7f02002a;
+        public static final int single_layout_selector=0x7f02002b;
+        public static final int single_select=0x7f02002c;
+        public static final int single_unselect=0x7f02002d;
+        public static final int toggle_off=0x7f02002e;
+        public static final int toggle_on=0x7f02002f;
+        public static final int top_layout_selector=0x7f020030;
+        public static final int top_select=0x7f020031;
+        public static final int top_unselect=0x7f020032;
+        public static final int unhappy=0x7f020033;
+        public static final int user=0x7f020034;
+        public static final int welcome=0x7f020035;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f080013;
-        public static final int LinearLayout2=0x7f080015;
-        public static final int LinearLayout3=0x7f080017;
-        public static final int TabHost01=0x7f080012;
-        public static final int TextView01=0x7f080014;
-        public static final int TextView02=0x7f080016;
-        public static final int TextView03=0x7f080018;
-        public static final int about_rl_data=0x7f080001;
-        public static final int about_rl_team=0x7f080000;
-        public static final int about_rl_version=0x7f080002;
-        public static final int btn_login=0x7f08003a;
-        public static final int btn_register=0x7f08004f;
-        public static final int btn_register_now=0x7f08003b;
-        public static final int classify_gv=0x7f080031;
-        public static final int classify_item_tv=0x7f080032;
-        public static final int clearcache_textview=0x7f080022;
-        public static final int comment_imageview_head=0x7f080025;
-        public static final int comment_textview_content=0x7f080027;
-        public static final int comment_textview_name=0x7f080026;
-        public static final int comment_textview_time=0x7f080028;
-        public static final int content=0x7f08002d;
-        public static final int detail_imageView_meishi=0x7f080005;
-        public static final int detail_webview=0x7f08002c;
-        public static final int drawerlayout=0x7f08000b;
-        public static final int edittext_comment=0x7f08002a;
-        public static final int et_mail=0x7f08004d;
-        public static final int et_name=0x7f080036;
-        public static final int et_password=0x7f080039;
-        public static final int et_psw=0x7f08004e;
-        public static final int fragment_meishi_listview=0x7f080042;
-        public static final int id_collection_lv=0x7f080003;
-        public static final int imageview1=0x7f08001d;
-        public static final int imageview2=0x7f080021;
-        public static final int imageview3=0x7f080024;
-        public static final int imageview_comment_send=0x7f08002b;
-        public static final int item_main_imageview=0x7f080040;
-        public static final int item_main_textview=0x7f080041;
-        public static final int item_meishi_imageview=0x7f080043;
-        public static final int item_meishi_textview_collect=0x7f080047;
-        public static final int item_meishi_textview_count=0x7f080046;
-        public static final int item_meishi_textview_keywords=0x7f080045;
-        public static final int item_meishi_textview_name=0x7f080044;
-        public static final int iv_head=0x7f08000f;
-        public static final int layout_login=0x7f080033;
-        public static final int layout_register=0x7f08004a;
-        public static final int left=0x7f08000d;
-        public static final int left_listview=0x7f080011;
-        public static final int listview_comment=0x7f080029;
-        public static final int login_container=0x7f08000a;
-        public static final int mBottomView=0x7f08003e;
-        public static final int mGridView=0x7f08003c;
-        public static final int mTextView=0x7f08003f;
-        public static final int mTopView=0x7f08003d;
-        public static final int main_container=0x7f08000c;
-        public static final int menu_collect=0x7f08005c;
-        public static final int menu_delete=0x7f08005b;
-        public static final int menu_item_imageview=0x7f080056;
-        public static final int menu_item_textview=0x7f080057;
-        public static final int menu_search=0x7f08005d;
-        public static final int message=0x7f08002e;
-        public static final int negativeButton=0x7f080030;
-        public static final int positiveButton=0x7f08002f;
-        public static final int radiogroup_mid=0x7f080006;
-        public static final int rb_comment=0x7f080008;
-        public static final int rb_detail=0x7f080007;
-        public static final int rl_ail=0x7f08004b;
-        public static final int rl_head=0x7f08000e;
-        public static final int rl_username=0x7f080034;
-        public static final int rl_userpsw=0x7f080037;
-        public static final int rl_warning=0x7f080048;
-        public static final int search_button=0x7f08001a;
-        public static final int search_edittext=0x7f080019;
-        public static final int search_info=0x7f08001b;
-        public static final int search_listview=0x7f08001c;
-        public static final int search_tv_count=0x7f080059;
-        public static final int search_tv_food=0x7f08005a;
-        public static final int search_tv_name=0x7f080058;
-        public static final int setting_about_rl=0x7f080023;
-        public static final int setting_cache_rl=0x7f080020;
-        public static final int setting_noimage_tg=0x7f08001f;
-        public static final int setting_noimage_tv=0x7f08001e;
-        public static final int tv_collection_name=0x7f080004;
-        public static final int tv_head=0x7f080010;
-        public static final int tv_mail=0x7f08004c;
-        public static final int tv_name=0x7f080035;
-        public static final int tv_psw=0x7f080038;
-        public static final int tv_warning=0x7f080049;
-        public static final int userinfo_button_logout=0x7f080055;
-        public static final int userinfo_imageview_head=0x7f080051;
-        public static final int userinfo_rl_head=0x7f080050;
-        public static final int userinfo_rl_mail=0x7f080053;
-        public static final int userinfo_rl_name=0x7f080052;
-        public static final int userinfo_rl_signature=0x7f080054;
-        public static final int viewpager_content=0x7f080009;
+        public static final int LinearLayout1=0x7f090015;
+        public static final int LinearLayout2=0x7f090017;
+        public static final int LinearLayout3=0x7f090019;
+        public static final int TabHost01=0x7f090014;
+        public static final int about_rl_data=0x7f090001;
+        public static final int about_rl_team=0x7f090000;
+        public static final int about_rl_version=0x7f090002;
+        public static final int btn_login=0x7f090038;
+        public static final int btn_register=0x7f090050;
+        public static final int btn_register_now=0x7f090039;
+        public static final int chk_agree=0x7f09004e;
+        public static final int classify_gv=0x7f09002f;
+        public static final int classify_item_tv=0x7f090030;
+        public static final int comment_imageview_head=0x7f090023;
+        public static final int comment_textview_content=0x7f090025;
+        public static final int comment_textview_name=0x7f090024;
+        public static final int comment_textview_time=0x7f090026;
+        public static final int content=0x7f09002b;
+        public static final int detail_imageView_meishi=0x7f090005;
+        public static final int detail_webview=0x7f09002a;
+        public static final int drawerlayout=0x7f09000d;
+        public static final int edittext_comment=0x7f090028;
+        public static final int et_mail=0x7f09004b;
+        public static final int et_name=0x7f090034;
+        public static final int et_password=0x7f090037;
+        public static final int et_psw=0x7f09004c;
+        public static final int feedback_btn_ok=0x7f09000b;
+        public static final int feedback_et_message=0x7f09000a;
+        public static final int fragment_meishi_listview=0x7f090040;
+        public static final int id_collection_lv=0x7f090003;
+        public static final int imageview_comment_send=0x7f090029;
+        public static final int item_main_imageview=0x7f09003e;
+        public static final int item_main_textview=0x7f09003f;
+        public static final int item_meishi_imageview=0x7f090041;
+        public static final int item_meishi_textview_collect=0x7f090045;
+        public static final int item_meishi_textview_count=0x7f090044;
+        public static final int item_meishi_textview_keywords=0x7f090043;
+        public static final int item_meishi_textview_name=0x7f090042;
+        public static final int iv_head=0x7f090011;
+        public static final int layout_login=0x7f090031;
+        public static final int layout_register=0x7f090048;
+        public static final int left=0x7f09000f;
+        public static final int left_listview=0x7f090013;
+        public static final int listview_comment=0x7f090027;
+        public static final int ll_agree=0x7f09004d;
+        public static final int login_container=0x7f09000c;
+        public static final int mBottomView=0x7f09003c;
+        public static final int mGridView=0x7f09003a;
+        public static final int mTextView=0x7f09003d;
+        public static final int mTopView=0x7f09003b;
+        public static final int main_container=0x7f09000e;
+        public static final int menu_collect=0x7f09005d;
+        public static final int menu_delete=0x7f09005c;
+        public static final int menu_item_imageview=0x7f090057;
+        public static final int menu_item_textview=0x7f090058;
+        public static final int menu_search=0x7f09005e;
+        public static final int message=0x7f09002c;
+        public static final int message_tv_comment=0x7f090018;
+        public static final int message_tv_me=0x7f090016;
+        public static final int message_tv_tongzhi=0x7f09001a;
+        public static final int negativeButton=0x7f09002e;
+        public static final int positiveButton=0x7f09002d;
+        public static final int radiogroup_mid=0x7f090006;
+        public static final int rb_comment=0x7f090008;
+        public static final int rb_detail=0x7f090007;
+        public static final int rl_ail=0x7f090049;
+        public static final int rl_head=0x7f090010;
+        public static final int rl_username=0x7f090032;
+        public static final int rl_userpsw=0x7f090035;
+        public static final int rl_warning=0x7f090046;
+        public static final int search_button=0x7f09001c;
+        public static final int search_edittext=0x7f09001b;
+        public static final int search_info=0x7f09001d;
+        public static final int search_listview=0x7f09001e;
+        public static final int search_tv_count=0x7f09005a;
+        public static final int search_tv_food=0x7f09005b;
+        public static final int search_tv_name=0x7f090059;
+        public static final int setting_about_ll=0x7f090022;
+        public static final int setting_cache_ll=0x7f090020;
+        public static final int setting_feedback_ll=0x7f090021;
+        public static final int setting_noimage_tg=0x7f09001f;
+        public static final int tv_collection_name=0x7f090004;
+        public static final int tv_head=0x7f090012;
+        public static final int tv_mail=0x7f09004a;
+        public static final int tv_name=0x7f090033;
+        public static final int tv_psw=0x7f090036;
+        public static final int tv_server=0x7f09004f;
+        public static final int tv_warning=0x7f090047;
+        public static final int userinfo_button_logout=0x7f090056;
+        public static final int userinfo_imageview_head=0x7f090052;
+        public static final int userinfo_rl_head=0x7f090051;
+        public static final int userinfo_rl_mail=0x7f090054;
+        public static final int userinfo_rl_name=0x7f090053;
+        public static final int userinfo_rl_signature=0x7f090055;
+        public static final int viewpager_content=0x7f090009;
     }
     public static final class layout {
         public static final int activity_about=0x7f030000;
         public static final int activity_collection=0x7f030001;
         public static final int activity_collection_item=0x7f030002;
         public static final int activity_detail=0x7f030003;
-        public static final int activity_fragment_container=0x7f030004;
-        public static final int activity_main=0x7f030005;
-        public static final int activity_message=0x7f030006;
-        public static final int activity_search=0x7f030007;
-        public static final int activity_settings=0x7f030008;
-        public static final int activity_welcome=0x7f030009;
-        public static final int comment_item=0x7f03000a;
-        public static final int detail_comment=0x7f03000b;
-        public static final int detail_webview=0x7f03000c;
-        public static final int dialog_normal=0x7f03000d;
-        public static final int fragment_classify=0x7f03000e;
-        public static final int fragment_classify_item=0x7f03000f;
-        public static final int fragment_login=0x7f030010;
-        public static final int fragment_main=0x7f030011;
-        public static final int fragment_main_header=0x7f030012;
-        public static final int fragment_main_item=0x7f030013;
-        public static final int fragment_meishi=0x7f030014;
-        public static final int fragment_meishi_item=0x7f030015;
-        public static final int fragment_neterror=0x7f030016;
-        public static final int fragment_register=0x7f030017;
-        public static final int fragment_userinfo=0x7f030018;
-        public static final int leftmenu_item=0x7f030019;
-        public static final int search_item=0x7f03001a;
+        public static final int activity_feedback=0x7f030004;
+        public static final int activity_fragment_container=0x7f030005;
+        public static final int activity_main=0x7f030006;
+        public static final int activity_message=0x7f030007;
+        public static final int activity_search=0x7f030008;
+        public static final int activity_settings=0x7f030009;
+        public static final int activity_welcome=0x7f03000a;
+        public static final int comment_item=0x7f03000b;
+        public static final int detail_comment=0x7f03000c;
+        public static final int detail_webview=0x7f03000d;
+        public static final int dialog_normal=0x7f03000e;
+        public static final int fragment_classify=0x7f03000f;
+        public static final int fragment_classify_item=0x7f030010;
+        public static final int fragment_login=0x7f030011;
+        public static final int fragment_main=0x7f030012;
+        public static final int fragment_main_header=0x7f030013;
+        public static final int fragment_main_item=0x7f030014;
+        public static final int fragment_meishi=0x7f030015;
+        public static final int fragment_meishi_item=0x7f030016;
+        public static final int fragment_neterror=0x7f030017;
+        public static final int fragment_register=0x7f030018;
+        public static final int fragment_userinfo=0x7f030019;
+        public static final int leftmenu_item=0x7f03001a;
+        public static final int search_item=0x7f03001b;
     }
     public static final class menu {
-        public static final int menu_collection=0x7f070000;
-        public static final int menu_detail=0x7f070001;
-        public static final int menu_main=0x7f070002;
+        public static final int menu_collection=0x7f080000;
+        public static final int menu_detail=0x7f080001;
+        public static final int menu_main=0x7f080002;
     }
     public static final class string {
-        public static final int LeftMenu_Classify=0x7f050003;
-        public static final int LeftMenu_Exit=0x7f050007;
-        public static final int LeftMenu_Info=0x7f05000c;
-        public static final int LeftMenu_LoginHead=0x7f050008;
-        public static final int LeftMenu_Message=0x7f050012;
-        public static final int LeftMenu_MyCollection=0x7f050004;
-        public static final int LeftMenu_Settings=0x7f050006;
-        public static final int LeftMenu_Theme=0x7f050005;
-        public static final int Menu_Collect=0x7f05000a;
-        public static final int Menu_Delete=0x7f05000b;
-        public static final int Menu_Search=0x7f050009;
-        public static final int app_name=0x7f050000;
-        public static final int drawer_close=0x7f050002;
-        public static final int drawer_open=0x7f050001;
-        public static final int history_see=0x7f050010;
-        public static final int load=0x7f050011;
-        public static final int refresh=0x7f05000d;
-        public static final int settings_image=0x7f05000f;
-        public static final int warning_info=0x7f05000e;
+        public static final int LeftMenu_Classify=0x7f060003;
+        public static final int LeftMenu_Exit=0x7f060007;
+        public static final int LeftMenu_Info=0x7f06000c;
+        public static final int LeftMenu_LoginHead=0x7f060008;
+        public static final int LeftMenu_Message=0x7f060012;
+        public static final int LeftMenu_MyCollection=0x7f060004;
+        public static final int LeftMenu_Settings=0x7f060006;
+        public static final int LeftMenu_Theme=0x7f060005;
+        public static final int Menu_Collect=0x7f06000a;
+        public static final int Menu_Delete=0x7f06000b;
+        public static final int Menu_Search=0x7f060009;
+        public static final int app_name=0x7f060000;
+        public static final int drawer_close=0x7f060002;
+        public static final int drawer_open=0x7f060001;
+        public static final int history_see=0x7f060010;
+        public static final int load=0x7f060011;
+        public static final int refresh=0x7f06000d;
+        public static final int settings_image=0x7f06000f;
+        public static final int warning_info=0x7f06000e;
     }
     public static final class style {
-        public static final int AnimationActivity=0x7f06000a;
+        /**  activity动画 
+         */
+        public static final int AnimationActivity=0x7f070003;
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
@@ -225,15 +255,53 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
-        public static final int AppTheme=0x7f060001;
-        public static final int MyDialog=0x7f060008;
-        public static final int ThemeActivity=0x7f060009;
-        public static final int actionbar_style=0x7f060002;
-        public static final int drawer_background_style=0x7f060003;
-        public static final int drawer_text_style=0x7f060004;
-        public static final int meishi_background_style=0x7f060005;
-        public static final int meishi_text_style=0x7f060006;
-        public static final int myRadioGroupStyle=0x7f060007;
+        public static final int AppBaseTheme=0x7f070000;
+        public static final int AppTheme=0x7f070001;
+        /**  dialog样式 
+         */
+        public static final int MyDialog=0x7f07000a;
+        /**  activity主题 
+         */
+        public static final int ThemeActivity=0x7f070002;
+        /**  actionbar样式 
+ actionbar返回图标
+        <item name ="android:homeAsUpIndicator">@drawable/menu_back</item>  
+         
+         */
+        public static final int actionbar_style=0x7f070004;
+        /**  设置页面共用层样式 
+         */
+        public static final int base_layout=0x7f07000c;
+        /**  view分割线样式 
+         */
+        public static final int bg_line=0x7f070013;
+        /**  下圆角样式 
+         */
+        public static final int bottom_layout=0x7f07000f;
+        public static final int drawer_background_style=0x7f070005;
+        public static final int drawer_text_style=0x7f070006;
+        /**  文本右边箭头样式 
+         */
+        public static final int img_arrow=0x7f070012;
+        public static final int meishi_background_style=0x7f070007;
+        public static final int meishi_text_style=0x7f070008;
+        /** 无圆角样式  
+         */
+        public static final int mid_layout=0x7f07000e;
+        /**  详情页radiobutton样式 
+         */
+        public static final int myRadioGroupStyle=0x7f070009;
+        /**  全圆角样式 
+         */
+        public static final int single_layout=0x7f070010;
+        /**  上圆角样式 
+         */
+        public static final int top_layout=0x7f07000d;
+        /**  textview样式 
+         */
+        public static final int usertext=0x7f070011;
+        /**  最外层样式 
+         */
+        public static final int wrap_layout=0x7f07000b;
     }
 }

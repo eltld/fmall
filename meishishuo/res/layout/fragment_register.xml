@@ -2,17 +2,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
-    android:background="#e6e6e6">
+    android:background="@color/background">
 	
     <LinearLayout 
         android:id="@+id/layout_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="10dp"
-        android:background="#ffffff"
+        android:background="@color/white"
         android:orientation="vertical"
         >
       
@@ -69,17 +69,44 @@
         		android:singleLine="true"/>   
         </RelativeLayout>
     </LinearLayout>
+     <LinearLayout
+         android:id="@+id/ll_agree"   
+         android:layout_width="fill_parent"  
+         android:layout_height="wrap_content"  
+         android:layout_below="@+id/layout_register"	 
+         android:orientation="horizontal" 
+         android:layout_marginLeft="20dp"
+         android:layout_marginRight="10dp"
+         android:layout_marginTop="10dp">  
+  
+                <CheckBox  
+                    android:id="@+id/chk_agree"  
+                    android:layout_width="wrap_content"  
+                    android:layout_height="wrap_content"  
+                    android:button="@null"  
+                    android:checked="true"
+                    android:background="@drawable/checkbox_agree_selector"
+                     />  
+  
+                <TextView  
+                    android:id="@+id/tv_server"  
+                    android:layout_width="wrap_content"  
+                    android:layout_height="wrap_content"  
+                    android:clickable="true"  
+                    android:text="已阅读并同意《美食说服务条款》"  
+                    android:textColor="@color/blue" />  
+            </LinearLayout>  
 	<Button 
 	    android:id="@+id/btn_register"
 	    android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_register"
+        android:layout_below="@+id/ll_agree"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/btn_selector"
-        android:text="立即注册"
-        android:textColor="#000000"/>
+        android:text="注册账号"
+        android:textColor="@color/black"/>
    
 </RelativeLayout>

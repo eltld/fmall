@@ -2,111 +2,73 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-   	android:background="#f0f0f0"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="#F0F3F6"
+     >
+
     
-	<RelativeLayout 
-	    android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="10dp"
-		android:background="#ffffff">
-		<ImageView 
-		     android:id="@+id/imageview1"
-		     android:layout_width="wrap_content"
-		     android:layout_height="wrap_content"
-		     android:gravity="center_vertical"
-		     android:layout_centerVertical="true"
-		     android:layout_marginLeft="10dp"
-		     android:layout_alignParentLeft="true"
-		     android:src="@drawable/no_image"
-		     />
+    <LinearLayout style="@style/wrap_layout" >
+        <!-- 上圆角-->
+       <LinearLayout
+        	style="@style/top_layout"
+        	android:orientation="horizontal"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:paddingLeft="12dp"
+        	android:paddingRight="12dp"
+        	android:paddingTop="4dp"
+        	android:paddingBottom="4dp"
+        	android:gravity="center_vertical"
+        	android:clickable="true"
+        	android:focusable="true"
+        	>
 		<TextView
-		    android:id="@+id/setting_noimage_tv"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:gravity="center"
-		    android:layout_centerVertical="true"
-		    android:layout_toRightOf="@id/imageview1"
-		    android:layout_marginLeft="5dp"
-		    android:textSize="18sp"
+		    style="@style/usertext" 
 		    android:text="@string/settings_image" />
 		 <ToggleButton
 		    android:id="@+id/setting_noimage_tg"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:layout_marginRight="10dp"
-		    android:layout_alignParentRight="true"
 		    android:background="@drawable/selector_toggle_button"
 		    android:checked="false" 
 		    android:textOff=""
 		    android:textOn=""
 		    android:minWidth="40dp"
             android:minHeight="24dp"/>
-	</RelativeLayout>
-	<RelativeLayout 
-	    android:id="@+id/setting_cache_rl"
-	    android:layout_width="match_parent"
-		android:layout_height="40dp"
-		android:layout_marginTop="5dp"
-		android:background="#ffffff">
-		 <ImageView 
-		     android:id="@+id/imageview2"
-		     android:layout_width="wrap_content"
-		     android:layout_height="wrap_content"
-		     android:gravity="center_vertical"
-		     android:layout_centerVertical="true"
-		     android:layout_marginLeft="10dp"
-		     android:layout_alignParentLeft="true"
-		     android:src="@drawable/clear_cache"
-		     />
-		<TextView
-		    
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:gravity="center_vertical"
-		    android:layout_centerVertical="true"
-		    android:layout_toRightOf="@id/imageview2"
-		    android:layout_marginLeft="5dp"
-		    android:textSize="18sp"
-		    android:text="清除缓存" />
-		<TextView
-		    android:id="@+id/clearcache_textview"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:gravity="center_vertical"
-		    android:layout_centerVertical="true"
-		    android:layout_marginRight="10dp"
-		    android:layout_alignParentRight="true"
-		    android:textSize="14sp"
-		    android:text="5.4M" />
-	</RelativeLayout>
-<RelativeLayout 
-     	android:id="@+id/setting_about_rl"
-	    android:layout_width="match_parent"
-		android:layout_height="40dp"
-		android:layout_marginTop="5dp"
-		android:background="#ffffff">
-		<ImageView 
-		     android:id="@+id/imageview3"
-		     android:layout_width="wrap_content"
-		     android:layout_height="wrap_content"
-		     android:gravity="center_vertical"
-		     android:layout_centerVertical="true"
-		     android:layout_marginLeft="10dp"
-		     android:layout_alignParentLeft="true"
-		     android:src="@drawable/menu_info"
-		     />
-		<TextView
-		   
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:gravity="center_vertical"
-		    android:layout_centerVertical="true"
-		    android:layout_toRightOf="@id/imageview3"
-		    android:layout_marginLeft="5dp"
-		    android:textSize="18sp"
-		    android:text="@string/LeftMenu_Info" />
-		
-	</RelativeLayout>
-	
+	</LinearLayout>
+		<!-- 分割线 -->
+         <View style="@style/bg_line"/>
+        
+          <!-- 无圆角-->
+       <LinearLayout
+            android:id="@+id/setting_cache_ll"
+            style="@style/mid_layout">
+            <TextView style="@style/usertext" android:text="清除缓存" />
+          	<ImageView style="@style/img_arrow"/>
+        </LinearLayout>
+             <View style="@style/bg_line"/>
+          <!-- 下圆角-->
+       <LinearLayout
+           android:id="@+id/setting_feedback_ll"
+            style="@style/bottom_layout">
+            <TextView style="@style/usertext" android:text="意见反馈" />
+          	<ImageView style="@style/img_arrow"/>
+        </LinearLayout>
+             
+    </LinearLayout>
+
+    
+     <!-- 全圆角-->
+    <LinearLayout 
+        
+        style="@style/wrap_layout">
+        <LinearLayout
+            android:id="@+id/setting_about_ll"
+             style="@style/single_layout">
+            <TextView style="@style/usertext" android:text="关于"/>
+            <ImageView style="@style/img_arrow"/>
+        </LinearLayout>
+        
+    </LinearLayout>
+    
 </LinearLayout>

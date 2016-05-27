@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    android:background="@color/background"
+    android:orientation="vertical" >
+    <EditText
+        android:id="@+id/feedback_et_message" 
+        android:layout_width="match_parent"
+    	android:layout_height="140dp"
+    	android:gravity="top"
+    	android:background="@drawable/bg_layout_shape"
+    	android:inputType="textMultiLine"
+    	android:maxLines="5"
+		android:hint="您的反馈将帮助我们更快的成长"
+		
+        />
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/background"
+        />
+	<EditText 
+        android:layout_width="match_parent"
+    	android:layout_height="40dp"
+    	android:background="@drawable/bg_layout_shape"
+		android:inputType="textMultiLine"
+		android:maxLines="2"
+		android:hint="请输入联系方式(qq或手机号)"
+        />
+	<Button 
+	    android:id="@+id/feedback_btn_ok"
+	    android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btn_selector"
+        android:text="提交"
+        android:textColor="@color/black"
+	    />
+</LinearLayout>

@@ -25,6 +25,8 @@ public class LoginActivity extends FragmentActivity {
 		actionBar=getActionBar();
 		// 开启ActionBar上APP ICON的功能：点击打开和点击关闭drawer
 		actionBar.setDisplayHomeAsUpEnabled(true);
+		//不显示图标
+		actionBar.setDisplayShowHomeEnabled(true);
 		actionBar.setTitle("登录");
 		FragmentTransaction beginTransaction=getSupportFragmentManager().beginTransaction();
 		if(SettingsUtil.get(LoginActivity.this, SettingsUtil.IS_LOGIN)){

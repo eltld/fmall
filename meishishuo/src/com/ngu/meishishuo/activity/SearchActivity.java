@@ -20,25 +20,32 @@ import com.ngu.meishishuo.utils.Constants;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SearchActivity extends Activity {
+public class SearchActivity extends Activity implements OnItemClickListener{
 	private ActionBar actionBar;
-	private ListView listview;
-	private TextView tv_info;
-	private EditText edittext;
-	private ImageView button;
+	private ListView listview;//
+	private TextView tv_info;//搜索结果信息
+	private EditText edittext;//搜索框
+	private ImageView button;//搜索按钮
+	private List<MeiShi> list;//保存搜索结果
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// 
@@ -49,27 +56,48 @@ public class SearchActivity extends Activity {
 	private void initView(){
 		actionBar=getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
+		//不显示图标
+		actionBar.setDisplayShowHomeEnabled(true);
 		actionBar.setTitle("搜索");
 		listview=(ListView) findViewById(R.id.search_listview);
+		listview.setOnItemClickListener(this);
 		tv_info=(TextView) findViewById(R.id.search_info);
 		edittext=(EditText) findViewById(R.id.search_edittext);
+		//搜索框回车事件
+		edittext.setOnEditorActionListener(new TextView.OnEditorActionListener() { 
+			@Override
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				// 
+				if (actionId==EditorInfo.IME_ACTION_SEND ||(event!=null&&event.getKeyCode()== KeyEvent.KEYCODE_ENTER)) {                
+					doSearch();            
+					return true;             
+				}else{               
+					return false;
+				}    
+			}       
+			});
 		button=(ImageView) findViewById(R.id.search_button);
+		//搜索按钮点击事件监听
 		button.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				//
-				String query=edittext.getText().toString().trim();
-				//必须添加编码,否则http请求会得不到结果
-				String httpArg="name="+URLEncoder.encode(query);
-				
-				if(!TextUtils.isEmpty(query)){
-					new MeiShiAsyncTask().execute(Constants.nameUrl,httpArg);
-				}else{
-					Toast.makeText(SearchActivity.this, "搜索内容不能为空！", Toast.LENGTH_SHORT).show();
-				}
+				doSearch();
 			}
 		});
+	}
+	//搜索相关工作
+	private void doSearch(){
+		String query=edittext.getText().toString().trim();
+		//中文请求参数要添加编码,否则http请求会得不到结果
+		String httpArg="name="+URLEncoder.encode(query);
+		
+		if(!TextUtils.isEmpty(query)){
+			new MeiShiAsyncTask().execute(Constants.nameUrl,httpArg);
+		}else{
+			Toast.makeText(SearchActivity.this, "搜索内容不能为空！", Toast.LENGTH_SHORT).show();
+		}
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -88,9 +116,16 @@ public class SearchActivity extends Activity {
         }
 		return super.onOptionsItemSelected(item);
 	}
+	//搜索结果条目点击事件监听
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		// 
+		Intent intent=new Intent(SearchActivity.this,DetailActivity.class);
+		intent.putExtra("ID",list.get(position).getId());
+		startActivity(intent);
+	}
 	/*
-	 * 异步加载数据
-	 * 
+	 * 异步加载搜索结果
 	 */
 	public class MeiShiAsyncTask extends AsyncTask<String, Void, List<MeiShi>>
 	{
@@ -105,6 +140,7 @@ public class SearchActivity extends Activity {
 		@Override
 		protected void onPostExecute(List<MeiShi> result) {
 			super.onPostExecute(result);
+			list=result;
 			dialog.dismiss();
 			tv_info.setText("共有"+result.size()+"个结果");
 			tv_info.setVisibility(View.VISIBLE);
@@ -179,4 +215,5 @@ public class SearchActivity extends Activity {
 		    return resultList;
 		}
 	}
+
 }

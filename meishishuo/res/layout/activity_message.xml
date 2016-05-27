@@ -17,12 +17,12 @@
 			>
 			<LinearLayout
 			     android:id="@+id/LinearLayout1"
-				android:layout_width="fill_parent"
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:gravity="center">
 				<TextView
 				     android:text="暂时没有收到@"
-					android:id="@+id/TextView01" 
+					android:id="@+id/message_tv_me" 
 					android:gravity="center"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content">
@@ -30,12 +30,12 @@
 			</LinearLayout>
 			<LinearLayout 
 			    android:id="@+id/LinearLayout2"
-				android:layout_width="wrap_content"
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:gravity="center">
 				<TextView 
 				    android:text="暂时没有收到评论"
-					android:id="@+id/TextView02"
+					android:id="@+id/message_tv_comment"
 					android:gravity="center" 
 					android:layout_width="fill_parent"
 					android:layout_height="wrap_content">
@@ -43,12 +43,12 @@
 			</LinearLayout>
 			<LinearLayout 
 			    android:id="@+id/LinearLayout3"
-				android:layout_width="wrap_content"
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:gravity="center">
 				<TextView 
 				    android:text="暂时没有收到通知"
-					android:id="@+id/TextView03" 
+					android:id="@+id/message_tv_tongzhi" 
 					android:gravity="center"
 					android:layout_width="fill_parent"
 					android:layout_height="wrap_content">

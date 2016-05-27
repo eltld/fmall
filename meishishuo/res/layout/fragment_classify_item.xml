@@ -6,7 +6,7 @@
     > 
 <TextView
     android:gravity="center"
-    android:textColor="#000000"
+    android:textColor="@color/black"
     android:padding="10dp"
 	style="@style/meishi_background_style"
     android:layout_width="match_parent"

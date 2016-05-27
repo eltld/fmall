@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.ngu.meishishuo.R;
-import com.ngu.meishishuo.activity.LoginActivity;
 import com.ngu.meishishuo.utils.SettingsUtil;
 import com.ngu.meishishuo.utils.UserInfoUtil;
 

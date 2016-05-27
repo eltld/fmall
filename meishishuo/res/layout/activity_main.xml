@@ -51,7 +51,7 @@
     		android:choiceMode="singleChoice" 
    			style="@style/drawer_background_style"
    			android:dividerHeight="2dp" 
-   			android:divider="#d6cfce"
+   			android:divider="@color/white"
             >
         </ListView>
     </RelativeLayout>

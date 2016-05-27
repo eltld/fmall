@@ -20,7 +20,7 @@
 	    android:layout_height="wrap_content"
 	    android:layout_below="@+id/tv_warning"
 	    android:layout_centerHorizontal="true"
-	    android:textColor="#56abe4"
+	    android:textColor="@color/blue"
 	    android:text="@string/refresh" />
 
 </RelativeLayout>

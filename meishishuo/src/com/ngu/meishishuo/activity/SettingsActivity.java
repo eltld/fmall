@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -21,8 +21,7 @@ import android.widget.ToggleButton;
 public class SettingsActivity extends Activity {
 	private ActionBar actionBar;
 	private ToggleButton toggleButton;
-	private RelativeLayout rl_cache,rl_about;
-	private TextView tv_clearcache;
+	private LinearLayout ll_cache,ll_about,ll_feedback;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// 
@@ -34,26 +33,40 @@ public class SettingsActivity extends Activity {
 	private void initView(){
 		actionBar=getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
+		//不显示图标
+		actionBar.setDisplayShowHomeEnabled(true);
 		actionBar.setTitle("设置");
 		toggleButton=(ToggleButton) findViewById(R.id.setting_noimage_tg);
-		rl_cache=(RelativeLayout) findViewById(R.id.setting_cache_rl);
-		rl_about=(RelativeLayout) findViewById(R.id.setting_about_rl);
-		tv_clearcache=(TextView) rl_cache.findViewById(R.id.clearcache_textview);
-		rl_cache.setOnClickListener(new OnClickListener() {
+		ll_cache= (LinearLayout) findViewById(R.id.setting_cache_ll);
+		ll_about= (LinearLayout) findViewById(R.id.setting_about_ll);
+		ll_feedback=(LinearLayout) findViewById(R.id.setting_feedback_ll);
+		//清除缓存
+		ll_cache.setOnClickListener(new OnClickListener() {
 		
 			@Override
 			public void onClick(View v) {
 				// 
 				Toast.makeText(SettingsActivity.this, "缓存已清除！", Toast.LENGTH_SHORT).show();
-				tv_clearcache.setText("0M");
+				
 			}
 		});
-		rl_about.setOnClickListener(new OnClickListener() {
+		//关于
+		ll_about.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// 
 				Intent intent=new Intent(SettingsActivity.this,AboutActivity.class);
+				startActivity(intent);
+			}
+		});
+		//意见反馈
+		ll_feedback.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// 
+				Intent intent=new Intent(SettingsActivity.this,FeedbackActivity.class);
 				startActivity(intent);
 			}
 		});
@@ -81,7 +94,7 @@ public class SettingsActivity extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
+		// 
 		switch (item.getItemId()) {
 	 	case android.R.id.home://点击左上角图标返回
 	 		finish();

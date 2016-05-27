@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ngu.meishishuo"
     android:versionCode="1"
-    android:versionName="1.160515" >
+    android:versionName="1.160527" >
 
     <uses-sdk
         android:minSdkVersion="18"
@@ -88,6 +88,13 @@
         </activity>
           <activity 
             android:name="com.ngu.meishishuo.activity.MessageActivity"
+            android:label="@string/app_name" 
+            android:theme="@style/ThemeActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+         <activity 
+            android:name="com.ngu.meishishuo.activity.FeedbackActivity"
             android:label="@string/app_name" 
             android:theme="@style/ThemeActivity"
             android:screenOrientation="portrait"

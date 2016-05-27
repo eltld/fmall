@@ -49,6 +49,8 @@ public class CollectionActivity extends Activity {
 	private void initView(){
 		actionBar=getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
+		//不显示图标
+		actionBar.setDisplayShowHomeEnabled(true);
 		actionBar.setTitle("我的收藏");
 		mListView=(ListView)findViewById(R.id.id_collection_lv);
 		

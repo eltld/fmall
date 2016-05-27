@@ -22,6 +22,8 @@ public class MessageActivity extends Activity {
 	private void initView(){
 		actionBar=getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
+		//不显示图标
+		actionBar.setDisplayShowHomeEnabled(true);
 		actionBar.setTitle("我的消息");
 		 tabHost = (TabHost) this.findViewById(R.id.TabHost01);  
          tabHost.setup();  

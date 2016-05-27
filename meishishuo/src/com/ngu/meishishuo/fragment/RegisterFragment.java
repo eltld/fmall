@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -19,6 +22,7 @@ public class RegisterFragment extends Fragment {
 	private Button btn_register;
 	private EditText et_mail,et_password;
 	private ActionBar actionBar;
+	private CheckBox ch_agree;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// 
@@ -33,6 +37,7 @@ public class RegisterFragment extends Fragment {
 		et_mail=(EditText) view.findViewById(R.id.et_mail);
 		et_password=(EditText) view.findViewById(R.id.et_psw);
 		btn_register=(Button) view.findViewById(R.id.btn_register);
+		ch_agree=(CheckBox) view.findViewById(R.id.chk_agree);
 		IntiEvent();
 		return view;
 	}
@@ -57,6 +62,15 @@ public class RegisterFragment extends Fragment {
 					LoginFragment fragment=new LoginFragment();
 					getFragmentManager().beginTransaction().replace(R.id.login_container,fragment).commit();
 				}
+			}
+		});
+		ch_agree.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				// 先同意条款才能注册
+				btn_register.setClickable(isChecked);;
+				
 			}
 		});
 	}
