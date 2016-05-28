@@ -55,7 +55,7 @@ public class SearchAdapter extends BaseAdapter {
 		if (convertView == null) {
 			hold = new ViewHolder();
 			convertView = LayoutInflater.from(context).inflate(
-					R.layout.search_item, null);
+					R.layout.activity_search_item, null);
 			convertView.setTag(hold);
 		}else {
 			hold=(ViewHolder) convertView.getTag();

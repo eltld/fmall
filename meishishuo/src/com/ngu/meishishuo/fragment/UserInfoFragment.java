@@ -1,10 +1,11 @@
 package com.ngu.meishishuo.fragment;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.ngu.meishishuo.R;
-import com.ngu.meishishuo.activity.MainActivity;
+import com.ngu.meishishuo.utils.PictureDAO;
 import com.ngu.meishishuo.utils.SettingsUtil;
 import com.ngu.meishishuo.utils.UserInfoUtil;
 
@@ -26,9 +27,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
 public class UserInfoFragment extends Fragment {
 	private ActionBar actionBar;
@@ -37,8 +40,10 @@ public class UserInfoFragment extends Fragment {
 	private RelativeLayout name;//昵称
 	private RelativeLayout mail;//邮箱
 	private RelativeLayout signture;//个性签名
+	private TextView tv_name,tv_mail,tv_signature;
 	private Button logout;//退出登录
-	private byte[] bitmapToBytes;
+	private String info=null;//保存修改后的信息
+	private PictureDAO dao;//图片存取对象
 	//設定圖片的儲存位置，以及檔名
     private  File tmpFile = new File(Environment.getExternalStorageDirectory(), "image.jpg");
     private Uri outputFileUri = Uri.fromFile(tmpFile);
@@ -58,12 +63,31 @@ public class UserInfoFragment extends Fragment {
 	}
 	//初始化控件
 	private void InitView(View view){
+		dao=new PictureDAO(getActivity());
 		head=(RelativeLayout) view.findViewById(R.id.userinfo_rl_head);
+		//头像
 		headImage=(ImageView) view.findViewById(R.id.userinfo_imageview_head);
+		//从数据库中读取图片数据
+		if(dao.getBitmap()!=null){
+			headImage.setImageBitmap(dao.getBitmap());
+		}
 		name=(RelativeLayout) view.findViewById(R.id.userinfo_rl_name);
 		mail=(RelativeLayout) view.findViewById(R.id.userinfo_rl_mail);
 		signture=(RelativeLayout) view.findViewById(R.id.userinfo_rl_signature);
 		logout=(Button) view.findViewById(R.id.userinfo_button_logout);
+		tv_name=(TextView) view.findViewById(R.id.userinfo_tv_name);
+		Map<String , String> userinfo=UserInfoUtil.getUserInfo(getActivity());
+		if(userinfo.get(UserInfoUtil.NAME)!=null){
+			tv_name.setText(userinfo.get(UserInfoUtil.NAME));
+		}
+		tv_mail=(TextView) view.findViewById(R.id.userinfo_tv_mail);
+		if(userinfo.get(UserInfoUtil.MAIL)!=null){
+			tv_mail.setText(userinfo.get(UserInfoUtil.MAIL));
+		}
+		tv_signature=(TextView) view.findViewById(R.id.userinfo_tv_signature);
+		if(userinfo.get(UserInfoUtil.SIGNATURE)!=null){
+			tv_signature.setText(userinfo.get(UserInfoUtil.SIGNATURE));
+		}
 	}
 	//初始化控件点击事件监听
 	private void InitEvent(){
@@ -114,7 +138,30 @@ public class UserInfoFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				//
-				Toast.makeText(getActivity(), "敬请期待. . .",Toast.LENGTH_SHORT).show();
+				AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+			    LayoutInflater inflater = (LayoutInflater)getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
+			    LinearLayout layout = (LinearLayout)inflater.inflate(R.layout.dialog_edittext, null);
+			    dialog.setView(layout);
+			    final EditText et = (EditText)layout.findViewById(R.id.dialog_et_content);
+			    TextView tv=(TextView) layout.findViewById(R.id.dialog_tv_title);
+			    et.setText(tv_name.getText().toString().trim());
+			    tv.setText("昵称");
+			    dialog.setPositiveButton("修改", new DialogInterface.OnClickListener() {
+			        public void onClick(DialogInterface dialog, int which) {
+			        	info=et.getText().toString().trim();
+			        	tv_name.setText(info);
+			        	UserInfoUtil.saveName(getActivity(), info);
+			        	dialog.dismiss();
+			        }
+			    });
+			    
+			    dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			        public void onClick(DialogInterface dialog, int which) {
+			        	dialog.dismiss();
+			        }
+			    });
+			    dialog.show();
+				
 			}
 		});
 		mail.setOnClickListener(new OnClickListener() {
@@ -122,7 +169,29 @@ public class UserInfoFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				//
-				Toast.makeText(getActivity(), "敬请期待. . .",Toast.LENGTH_SHORT).show();
+				AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+			    LayoutInflater inflater = (LayoutInflater)getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
+			    LinearLayout layout = (LinearLayout)inflater.inflate(R.layout.dialog_edittext, null);
+			    dialog.setView(layout);
+			    final EditText et = (EditText)layout.findViewById(R.id.dialog_et_content);
+			    TextView tv=(TextView) layout.findViewById(R.id.dialog_tv_title);
+			    et.setText(tv_mail.getText().toString().trim());
+			    tv.setText("邮箱");
+			    dialog.setPositiveButton("修改", new DialogInterface.OnClickListener() {
+			        public void onClick(DialogInterface dialog, int which) {
+			        	info=et.getText().toString().trim();
+			        	tv_mail.setText(info);
+			        	UserInfoUtil.saveName(getActivity(), info);
+			        	dialog.dismiss();
+			        }
+			    });
+			    
+			    dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			        public void onClick(DialogInterface dialog, int which) {
+			        	dialog.dismiss();
+			        }
+			    });
+			    dialog.show();
 			}
 		});
 		signture.setOnClickListener(new OnClickListener() {
@@ -130,7 +199,29 @@ public class UserInfoFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				//
-				Toast.makeText(getActivity(), "敬请期待. . .",Toast.LENGTH_SHORT).show();
+				AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+			    LayoutInflater inflater = (LayoutInflater)getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
+			    LinearLayout layout = (LinearLayout)inflater.inflate(R.layout.dialog_edittext, null);
+			    dialog.setView(layout);
+			    final EditText et = (EditText)layout.findViewById(R.id.dialog_et_content);
+			    TextView tv=(TextView) layout.findViewById(R.id.dialog_tv_title);
+			    et.setText(tv_signature.getText().toString().trim());
+			    tv.setText("个性签名");
+			    dialog.setPositiveButton("修改", new DialogInterface.OnClickListener() {
+			        public void onClick(DialogInterface dialog, int which) {
+			        	info=et.getText().toString().trim();
+			        	tv_signature.setText(info);
+			        	UserInfoUtil.saveName(getActivity(), info);
+			        	dialog.dismiss();
+			        }
+			    });
+			    
+			    dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			        public void onClick(DialogInterface dialog, int which) {
+			        	dialog.dismiss();
+			        }
+			    });
+			    dialog.show();
 			}
 		});
 	}
@@ -143,6 +234,11 @@ public class UserInfoFragment extends Fragment {
 		if (requestCode == 1 && resultCode == getActivity().RESULT_OK){
 			Bitmap bmp = BitmapFactory.decodeFile(outputFileUri.getPath()); //利用BitmapFactory去取得剛剛拍照的圖像
 			headImage.setImageBitmap(bmp);
+			if(dao.getBitmap()!=null){
+				dao.update(bmp);//更新数据库
+			}else{
+				dao.saveBitmap(bmp);//保存
+			}
 		}
 		//选择图片
 		 else if (requestCode == 2 && resultCode == getActivity().RESULT_OK && null != data) {
@@ -154,20 +250,15 @@ public class UserInfoFragment extends Fragment {
 			int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
 			String picturePath = cursor.getString(columnIndex);
 			cursor.close();
-			Bitmap image=BitmapFactory.decodeFile(picturePath);
-			headImage.setImageBitmap(image);
-			bitmapToBytes=Bitmap2Bytes(image);
+			Bitmap bmp=BitmapFactory.decodeFile(picturePath);
+			headImage.setImageBitmap(bmp);
+			if(dao.getBitmap()!=null){
+				dao.update(bmp);//更新数据库
+			}else{
+				dao.saveBitmap(bmp);//保存
+			}
 		}
 		
 	}
-	/**
-	 * bitmap to byte[]
-	 * @param bitmap 
-	 * @return byte[]
-	 */
-	private byte[] Bitmap2Bytes(Bitmap bitmap) {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-		return baos.toByteArray();
-	}
+	
 }

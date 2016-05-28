@@ -14,7 +14,7 @@ import org.json.JSONObject;
 import com.ngu.meishishuo.R;
 import com.ngu.meishishuo.adapter.ClassifyAdapter;
 import com.ngu.meishishuo.model.MeiShi;
-import com.ngu.meishishuo.utils.Constants;
+import com.ngu.meishishuo.utils.AllUrl;
 import com.ngu.meishishuo.utils.MeiShiDao;
 import com.ngu.meishishuo.utils.NetUtil;
 
@@ -55,7 +55,7 @@ public class ClassifyFragment extends Fragment implements OnItemClickListener {
 		if(classifyList.isEmpty()){//本地为空则从网络加载
 			if(NetUtil.isNetworkAvailable(getActivity())){
 				//网络可用，则建立异步任务加载数据
-				new ClassifyAsyncTask().execute(Constants.classifyUrl,httpArg);
+				new ClassifyAsyncTask().execute(AllUrl.classifyUrl,httpArg);
 			}else{
 				Toast.makeText(getActivity(), "网络不可用，请检查网络设置！", Toast.LENGTH_SHORT).show();
 			}

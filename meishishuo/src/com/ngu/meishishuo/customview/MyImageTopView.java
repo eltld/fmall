@@ -145,7 +145,7 @@ public class MyImageTopView extends ViewGroup {//自定义控件，从ViewGroup�
 		for (int i = 0; i < num; i++) {// 循环逐个添加图片控件
 			topImageViews[i]= new ImageView(getContext());
 			topImageViews[i].setImageResource(imgIds[i]);// 设置每个图片控件的图片
-			topImageViews[i].setScaleType(ImageView.ScaleType.CENTER_CROP);
+			topImageViews[i].setScaleType(ImageView.ScaleType.FIT_XY);
 			this.addView(topImageViews[i]);// 将图片添加到自定义的控件中
 		}
 	}

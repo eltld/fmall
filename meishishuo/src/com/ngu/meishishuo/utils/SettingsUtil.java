@@ -7,7 +7,7 @@ import android.content.SharedPreferences.Editor;
 public class SettingsUtil {
 	public static final String NO_IMAGE = "no_image";	// 无图模式
 	public static final String IS_LOGIN ="is_login";//是否登录
-	public static final String ACTIONBAR_COLOR="actionbar_color";//主题颜色
+
 	/**
 	 * 获取配置
 	 * @param context

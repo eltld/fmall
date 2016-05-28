@@ -17,8 +17,9 @@
 	        android:layout_width="match_parent"
     	 	android:layout_height="40dp"
 	        android:layout_toLeftOf="@+id/search_button"
+	        android:imeOptions="actionSearch"
 	        android:singleLine="true"
-	        android:hint="输入菜谱名搜索"
+	        android:hint="输入菜谱名搜索(“酸辣土豆丝”)"
 	        />
 	    <ImageView 
 	        android:id="@+id/search_button"

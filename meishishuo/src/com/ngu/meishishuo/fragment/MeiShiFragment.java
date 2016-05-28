@@ -15,7 +15,7 @@ import com.ngu.meishishuo.R;
 import com.ngu.meishishuo.activity.DetailActivity;
 import com.ngu.meishishuo.adapter.MeiShiAdapter;
 import com.ngu.meishishuo.model.MeiShi;
-import com.ngu.meishishuo.utils.Constants;
+import com.ngu.meishishuo.utils.AllUrl;
 import com.ngu.meishishuo.utils.NetUtil;
 
 import android.app.ActionBar;
@@ -60,7 +60,7 @@ public class MeiShiFragment extends Fragment implements OnItemClickListener{
 			mainListView=(ListView)view.findViewById(R.id.fragment_meishi_listview);
 			mainListView.setOnItemClickListener(this);
 			if(NetUtil.isNetworkAvailable(getActivity())){
-				new MeiShiAsyncTask().execute(Constants.listUrl,httpArg);
+				new MeiShiAsyncTask().execute(AllUrl.listUrl,httpArg);
 			}else{
 				Toast.makeText(getActivity(), "网络不可用，请检查网络设置！", Toast.LENGTH_SHORT).show();
 			}
@@ -103,7 +103,7 @@ public class MeiShiFragment extends Fragment implements OnItemClickListener{
 
 		@Override
 		protected void onProgressUpdate(Void... values) {
-			
+			dialog.setCancelable(true);
 			super.onProgressUpdate(values);
 			
 		}

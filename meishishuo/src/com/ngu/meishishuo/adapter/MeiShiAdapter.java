@@ -2,7 +2,7 @@ package com.ngu.meishishuo.adapter;
 
 import java.util.List;
 
-import com.ngu.meishishuo.utils.Constants;
+import com.ngu.meishishuo.utils.AllUrl;
 import com.ngu.meishishuo.utils.MeiShiDao;
 import com.ngu.meishishuo.utils.SettingsUtil;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -92,7 +92,7 @@ public class MeiShiAdapter extends BaseAdapter {
 		//listview滑动过程中，值不变
 		final MeiShi item=list.get(position);
 		
-		String url=Constants.imageUrl+item.getImg()+Constants.imageSize;
+		String url=AllUrl.imageUrl+item.getImg()+AllUrl.imageSize;
 		if(!noImage){
 			ImageLoader.getInstance()
 			.displayImage(url, hold.imageView, options, new SimpleImageLoadingListener() {

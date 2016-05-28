@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.ngu.meishishuo.R;
 import com.ngu.meishishuo.model.MeiShi;
-import com.ngu.meishishuo.utils.Constants;
+import com.ngu.meishishuo.utils.AllUrl;
 import com.ngu.meishishuo.utils.SettingsUtil;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -87,7 +87,7 @@ public  class MainGridViewAdapter extends BaseAdapter{
 			hold.imageView=(ImageView) convertView.findViewById(R.id.item_main_imageview);
 			hold.textView=(TextView) convertView.findViewById(R.id.item_main_textview);
 			//异步加载图片
-			String url=Constants.imageUrl+list.get(position).getImg()+Constants.imageSize;
+			String url=AllUrl.imageUrl+list.get(position).getImg()+AllUrl.imageSize;
 			if(!noImage){
 				ImageLoader.getInstance()
 				.displayImage(url, hold.imageView, options, new SimpleImageLoadingListener() {

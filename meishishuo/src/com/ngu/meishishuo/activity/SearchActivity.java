@@ -15,7 +15,8 @@ import org.json.JSONObject;
 import com.ngu.meishishuo.R;
 import com.ngu.meishishuo.adapter.SearchAdapter;
 import com.ngu.meishishuo.model.MeiShi;
-import com.ngu.meishishuo.utils.Constants;
+import com.ngu.meishishuo.utils.AllUrl;
+import com.ngu.meishishuo.utils.NetUtil;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -89,14 +90,19 @@ public class SearchActivity extends Activity implements OnItemClickListener{
 	}
 	//搜索相关工作
 	private void doSearch(){
-		String query=edittext.getText().toString().trim();
-		//中文请求参数要添加编码,否则http请求会得不到结果
-		String httpArg="name="+URLEncoder.encode(query);
-		
-		if(!TextUtils.isEmpty(query)){
-			new MeiShiAsyncTask().execute(Constants.nameUrl,httpArg);
+		if(NetUtil.isNetworkAvailable(SearchActivity.this)){
+			String query=edittext.getText().toString().trim();
+			//中文请求参数要添加编码,否则http请求会得不到结果
+			String httpArg="name="+URLEncoder.encode(query);
+			
+			if(!TextUtils.isEmpty(query)){
+				new MeiShiAsyncTask().execute(AllUrl.nameUrl,httpArg);
+			}else{
+				Toast.makeText(SearchActivity.this, "搜索内容不能为空！", Toast.LENGTH_SHORT).show();
+			}
 		}else{
-			Toast.makeText(SearchActivity.this, "搜索内容不能为空！", Toast.LENGTH_SHORT).show();
+			Toast.makeText(SearchActivity.this, "网络不可用，请检查网络设置！", Toast.LENGTH_SHORT).show();
+			
 		}
 	}
 	@Override

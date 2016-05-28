@@ -1,5 +1,8 @@
 package com.ngu.meishishuo.fragment;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.ngu.meishishuo.R;
 import com.ngu.meishishuo.utils.UserInfoUtil;
 
@@ -57,7 +60,11 @@ public class RegisterFragment extends Fragment {
 					Toast.makeText(getActivity(), "用户名或密码不能为空！", Toast.LENGTH_SHORT).show();
 				}
 				else{
-					UserInfoUtil.saveUserInfo(getActivity(), username, password);
+					//保存账号密码信息
+					Map<String,String> user = new HashMap<String, String>();
+					user.put(UserInfoUtil.USERNAME, username);
+					user.put(UserInfoUtil.PASSWORD, password);
+					UserInfoUtil.saveUser(getActivity(),user);
 					Toast.makeText(getActivity(), "注册成功！", Toast.LENGTH_SHORT).show();
 					LoginFragment fragment=new LoginFragment();
 					getFragmentManager().beginTransaction().replace(R.id.login_container,fragment).commit();

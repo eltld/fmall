@@ -17,7 +17,7 @@ import com.ngu.meishishuo.adapter.MainGridViewAdapter;
 import com.ngu.meishishuo.customview.HeaderGridView;
 import com.ngu.meishishuo.customview.MyImageTopView;
 import com.ngu.meishishuo.model.MeiShi;
-import com.ngu.meishishuo.utils.Constants;
+import com.ngu.meishishuo.utils.AllUrl;
 import com.ngu.meishishuo.utils.NetUtil;
 
 import android.app.ProgressDialog;
@@ -65,7 +65,7 @@ public class MainFragment extends Fragment implements OnItemClickListener{
 		mHeadGridView.addHeaderView(headerView);
 		mHeadGridView.setOnItemClickListener(this);
 		if(NetUtil.isNetworkAvailable(getActivity())){
-			new MeiShiAsyncTask().execute(Constants.listUrl,httpArg);
+			new MeiShiAsyncTask().execute(AllUrl.listUrl,httpArg);
 		}
 		else{
 			Toast.makeText(getActivity(), "网络不可用，请检查网络设置！", Toast.LENGTH_SHORT).show();
@@ -141,7 +141,7 @@ public class MainFragment extends Fragment implements OnItemClickListener{
 		@Override
 		protected void onProgressUpdate(Void... values) {
 			super.onProgressUpdate(values);
-			 
+			 dialog.setCancelable(true);
 		}
 
 		@Override

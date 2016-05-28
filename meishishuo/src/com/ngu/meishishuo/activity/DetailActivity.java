@@ -17,7 +17,7 @@ import com.ngu.meishishuo.adapter.CommentAdapter;
 import com.ngu.meishishuo.model.Comment;
 import com.ngu.meishishuo.model.MeiShi;
 import com.ngu.meishishuo.utils.CommentDao;
-import com.ngu.meishishuo.utils.Constants;
+import com.ngu.meishishuo.utils.AllUrl;
 import com.ngu.meishishuo.utils.MeiShiDao;
 import com.ngu.meishishuo.utils.NetUtil;
 import com.ngu.meishishuo.utils.SettingsUtil;
@@ -100,7 +100,7 @@ public class DetailActivity extends Activity implements OnItemClickListener{
 		initView();
 		if(NetUtil.isNetworkAvailable(DetailActivity.this)){
 			//网络可用，则建立异步任务加载数据
-			new DetailAsyncTask().execute(Constants.showUrl,httpArg);
+			new DetailAsyncTask().execute(AllUrl.showUrl,httpArg);
 		}else{
 			Toast.makeText(DetailActivity.this, "网络不可用！", Toast.LENGTH_SHORT).show();
 		}
@@ -264,6 +264,12 @@ public class DetailActivity extends Activity implements OnItemClickListener{
 	 		dao.insert(meishi,MeiShiDao.COLLECTION_TABLE);
 	 		Toast.makeText(DetailActivity.this,"\""+meishi.getName()+"\"已收藏", Toast.LENGTH_SHORT).show();
 	 		break;
+	 	case R.id.menu_share://分享
+	 		Intent intent = new Intent(Intent.ACTION_SEND); // 启动分享发送的属性
+	 		intent.setType("text/plain"); // 分享发送的数据类型
+	 		String msg = actionBar.getTitle().toString();
+	 		intent.putExtra(Intent.EXTRA_TEXT, msg); // 分享的内容
+	 		startActivity(Intent.createChooser(intent, "选择分享"));// 目标应用选择对话框的标题
         }
 		return super.onOptionsItemSelected(item);
 	}
@@ -295,7 +301,7 @@ public class DetailActivity extends Activity implements OnItemClickListener{
 			//加载图片
 			if(!noImage){
 				ImageLoader.getInstance()
-				.displayImage(Constants.imageUrl+result.getImg()+Constants.imageSize,meishiImage, options, new SimpleImageLoadingListener() {
+				.displayImage(AllUrl.imageUrl+result.getImg()+AllUrl.imageSize,meishiImage, options, new SimpleImageLoadingListener() {
 					@Override
 					public void onLoadingStarted(String imageUri, View view) {
 						

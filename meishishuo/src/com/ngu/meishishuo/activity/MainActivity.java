@@ -7,11 +7,10 @@ import com.ngu.meishishuo.R;
 import com.ngu.meishishuo.adapter.LeftMenuAdapter;
 import com.ngu.meishishuo.customview.MyDialog;
 import com.ngu.meishishuo.fragment.MainFragment;
-import com.ngu.meishishuo.fragment.MeiShiFragment;
 import com.ngu.meishishuo.fragment.NetErrorFragment;
 import com.ngu.meishishuo.model.LeftMenu;
-import com.ngu.meishishuo.utils.MeiShiDao;
 import com.ngu.meishishuo.utils.NetUtil;
+import com.ngu.meishishuo.utils.PictureDAO;
 import com.ngu.meishishuo.utils.SettingsUtil;
 import com.ngu.meishishuo.utils.UserInfoUtil;
 
@@ -28,7 +27,6 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MenuItem.OnActionExpandListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -37,7 +35,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
-import android.widget.SearchView.OnQueryTextListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,9 +44,9 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
 	private RelativeLayout rl_head;
 	private TextView tv_name;
 	private ImageView iv_head;//头像
-	ActionBarDrawerToggle mDrawerToggle; //actionbar抽屉开关 
+	private ActionBarDrawerToggle mDrawerToggle; //actionbar抽屉开关 
 	private ActionBar actionBar;
-	private SearchView searchView; 
+	private PictureDAO dao;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +57,7 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
 	}
 	
 	private void  initView() {
+		dao=new PictureDAO(this);
 		actionBar=getActionBar();
 		// 开启ActionBar上APP ICON的功能：点击打开和点击关闭drawer
 		actionBar.setDisplayHomeAsUpEnabled(true);
@@ -79,7 +77,12 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
 		//如果已经登录，将用户名设置为当前登录的用户名
 		if(SettingsUtil.get(MainActivity.this, SettingsUtil.IS_LOGIN)){
 			tv_name.setText(UserInfoUtil.getUserInfo(MainActivity.this).get(UserInfoUtil.USERNAME));
-			iv_head.setImageResource(R.drawable.myhead);
+			//从数据库中读取图片数据
+			if(dao.getBitmap()!=null){
+				iv_head.setImageBitmap(dao.getBitmap());
+			}else{
+				iv_head.setImageResource(R.drawable.myhead);
+			}
 		}
 		//左菜单数据适配
 		leftListView=(ListView)leftDrawerLayout.findViewById(R.id.left_listview);
@@ -139,7 +142,13 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
 					if(username.equals("请登录")){
 						iv_head.setImageResource(R.drawable.menu_head);
 					}else{
-					iv_head.setImageResource(R.drawable.myhead);
+						//从数据库中读取图片数据
+						if(dao.getBitmap()!=null){
+							iv_head.setImageBitmap(dao.getBitmap());
+						}else{
+							//设置默认头像
+							iv_head.setImageResource(R.drawable.myhead);
+						}
 					}
 				}
 			}
@@ -210,21 +219,24 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
 		if (keyCode == KeyEvent.KEYCODE_MENU) {//menu
 			if(leftDrawerLayout.isDrawerOpen(Gravity.START)) {
 				leftDrawerLayout.closeDrawer(Gravity.START);
+				return true;
 			}
 			else{
 				leftDrawerLayout.openDrawer(Gravity.START);
+				return true;
 			}
 		}
 		else if(keyCode==KeyEvent.KEYCODE_BACK) {//back
 			if(leftDrawerLayout.isDrawerOpen(Gravity.START)) {
 				leftDrawerLayout.closeDrawer(Gravity.START);
-			}
-			else{
-				showExitDialog();
+				return true;
+			}else{
+				 moveTaskToBack(true); //后台运行 
+		         return true;  
 			}
 				
 		}
-		return true;
+		return super.onKeyDown(keyCode, event);
 	}
 	//显示退出对话框
 	public void showExitDialog(){
