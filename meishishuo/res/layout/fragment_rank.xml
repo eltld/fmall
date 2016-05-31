@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <!-- 底部标签 -->
+		<RadioGroup
+	        android:id="@+id/radiogroup_top"
+	        android:layout_width="match_parent"  
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentTop="true"
+	        android:gravity="center"
+	        android:background="@color/white"
+	        android:orientation="horizontal" >  
+	        <RadioButton
+	            android:id="@+id/rb_week"
+	            style="@style/myRadioGroupStyle"
+	            android:padding="5dp"
+	            android:gravity="center"
+	           	android:checked="true"
+	           	android:background="@drawable/radiobutton_selector"
+	            android:text="周排行" />
+	        <RadioButton
+	            android:id="@+id/rb_month"
+	            style="@style/myRadioGroupStyle"
+	            android:padding="5dp"
+	            android:gravity="center"
+	            android:background="@drawable/radiobutton_selector"
+	            android:text="月排行" />
+	        <RadioButton
+	            android:id="@+id/rb_all"
+	            style="@style/myRadioGroupStyle"
+	            android:padding="5dp"
+	            android:gravity="center"
+	            android:background="@drawable/radiobutton_selector"
+	            android:text="总排行" />
+    	</RadioGroup> 
+		<FrameLayout 
+		    android:id="@+id/rank_container"
+	        android:layout_width="match_parent"  
+	        android:layout_height="match_parent"
+	        android:layout_below="@id/radiogroup_top"
+		    >
+		    
+		</FrameLayout>
+</RelativeLayout>

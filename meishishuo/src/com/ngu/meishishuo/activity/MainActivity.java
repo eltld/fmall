@@ -6,11 +6,12 @@ import java.util.List;
 import com.ngu.meishishuo.R;
 import com.ngu.meishishuo.adapter.LeftMenuAdapter;
 import com.ngu.meishishuo.customview.MyDialog;
+import com.ngu.meishishuo.fragment.ClassifyFragment;
 import com.ngu.meishishuo.fragment.MainFragment;
-import com.ngu.meishishuo.fragment.NetErrorFragment;
+import com.ngu.meishishuo.fragment.RankFragment;
 import com.ngu.meishishuo.model.LeftMenu;
 import com.ngu.meishishuo.utils.NetUtil;
-import com.ngu.meishishuo.utils.PictureDAO;
+import com.ngu.meishishuo.utils.ImageDao;
 import com.ngu.meishishuo.utils.SettingsUtil;
 import com.ngu.meishishuo.utils.UserInfoUtil;
 
@@ -21,6 +22,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -33,11 +35,14 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+@SuppressWarnings("deprecation")
 public class MainActivity extends FragmentActivity implements OnItemClickListener{
 	private DrawerLayout leftDrawerLayout;
 	private ListView leftListView;
@@ -46,8 +51,12 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
 	private ImageView iv_head;//头像
 	private ActionBarDrawerToggle mDrawerToggle; //actionbar抽屉开关 
 	private ActionBar actionBar;
-	private PictureDAO dao;
-
+	private RadioGroup rg_bottom;//底部标签
+	private RadioButton rb_everyday,rb_find,rb_rank;//精选，发现，排行 
+	private ImageDao dao;
+	private MainFragment mainfragment;//精选
+	private ClassifyFragment classifyfragment;//发现
+	private RankFragment rankfragment;//排行
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -57,19 +66,25 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
 	}
 	
 	private void  initView() {
-		dao=new PictureDAO(this);
+		dao=new ImageDao(this);
+
+		//底部标签
+		rg_bottom=(RadioGroup) findViewById(R.id.radiogroup_bottom);
+		rb_everyday=(RadioButton) findViewById(R.id.rb_everyday);
+		rb_find=(RadioButton) findViewById(R.id.rb_find);
+		rb_rank=(RadioButton) findViewById(R.id.rb_rank);
+
 		actionBar=getActionBar();
 		// 开启ActionBar上APP ICON的功能：点击打开和点击关闭drawer
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setTitle("首页");
-		FragmentTransaction beginTransaction=getSupportFragmentManager().beginTransaction();
-		if(NetUtil.isNetworkAvailable(MainActivity.this)){
-			MainFragment fragment=new MainFragment();
-			beginTransaction.replace(R.id.main_container, fragment).commit();
-		}else{
-			NetErrorFragment fragment=new NetErrorFragment();
-			beginTransaction.replace(R.id.main_container, fragment).commit();
-		}
+		//
+		FragmentTransaction beginTransaction = getSupportFragmentManager().beginTransaction();
+		mainfragment=new MainFragment();
+		rb_everyday.setTextColor(getResources().getColor(R.color.white));
+		beginTransaction.add(R.id.main_content, mainfragment,"tab1");
+		beginTransaction.commit();
+		//
 		leftDrawerLayout=(DrawerLayout) findViewById(R.id.drawerlayout);
 		rl_head=(RelativeLayout)leftDrawerLayout.findViewById(R.id.rl_head);
 		tv_name=(TextView) rl_head.findViewById(R.id.tv_head);
@@ -89,7 +104,6 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
 		//初始化左菜单数据
 		List<LeftMenu> menuItemList=new ArrayList<LeftMenu>();
 		menuItemList.add(new LeftMenu(R.drawable.menu_message, this.getString(R.string.LeftMenu_Message)));
-		menuItemList.add(new LeftMenu(R.drawable.menu_classify, this.getString(R.string.LeftMenu_Classify)));
 		menuItemList.add(new LeftMenu(R.drawable.menu_collection,this.getString(R.string.LeftMenu_MyCollection)));
 		menuItemList.add(new LeftMenu(R.drawable.menu_theme, this.getString(R.string.LeftMenu_Theme)));
 		menuItemList.add(new LeftMenu(R.drawable.menu_setting, this.getString(R.string.LeftMenu_Settings)));
@@ -99,6 +113,80 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
 	}
 	private void initEvent()
 	{	
+		//radiogroup标签切换
+		rg_bottom.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				//
+				FragmentManager fragmentmanager=getSupportFragmentManager();
+				FragmentTransaction beginTransaction = fragmentmanager.beginTransaction();
+				//
+				
+				switch (checkedId) {
+				case R.id.rb_everyday://精选
+					//设置文字颜色
+					rb_everyday.setTextColor(getResources().getColor(R.color.white));
+					rb_find.setTextColor(getResources().getColor(R.color.black));
+					rb_rank.setTextColor(getResources().getColor(R.color.black));
+					//
+					mainfragment=(MainFragment) fragmentmanager.findFragmentByTag("tab1");	
+					beginTransaction.show(mainfragment);
+					if(classifyfragment!=null){
+						beginTransaction.hide(classifyfragment);
+					}
+					if(rankfragment!=null){
+						beginTransaction.hide(rankfragment);
+					}
+					beginTransaction.commit();
+					break;
+
+				case R.id.rb_find://发现
+					//设置文字颜色
+					rb_everyday.setTextColor(getResources().getColor(R.color.black));
+					rb_find.setTextColor(getResources().getColor(R.color.white));
+					rb_rank.setTextColor(getResources().getColor(R.color.black));
+					classifyfragment=(ClassifyFragment) fragmentmanager.findFragmentByTag("tab2");
+					if(classifyfragment==null){
+						classifyfragment=new ClassifyFragment();
+						beginTransaction.add(R.id.main_content, classifyfragment,"tab2");
+						
+					}
+					//
+					beginTransaction.show(classifyfragment);
+					beginTransaction.hide(mainfragment);
+					if(rankfragment!=null){
+						beginTransaction.hide(rankfragment);
+					}
+					beginTransaction.commit();
+					break;
+				case R.id.rb_rank://排行
+					//设置文字颜色
+					rb_everyday.setTextColor(getResources().getColor(R.color.black));
+					rb_find.setTextColor(getResources().getColor(R.color.black));
+					rb_rank.setTextColor(getResources().getColor(R.color.white));
+					//
+					rankfragment=(RankFragment) fragmentmanager.findFragmentByTag("tab3");
+					if(rankfragment==null){
+						rankfragment=new RankFragment();
+						beginTransaction.add(R.id.main_content, rankfragment,"tab3");
+						
+					}
+					//显示rankfragment
+					beginTransaction.show(rankfragment);
+					beginTransaction.hide(mainfragment);
+					if(classifyfragment!=null){
+						beginTransaction.hide(classifyfragment);
+					}
+					beginTransaction.commit();
+					break;
+					
+				default:
+					break;
+				}
+				
+			}
+		});
 		//左菜单登录点击事件
 		rl_head.setOnClickListener(new OnClickListener() {
 			@Override
@@ -134,14 +222,14 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, requestCode, data);
-		if(data!=null){
-			if(resultCode==1){
-				if(requestCode==1){
+		if(requestCode==1){//从LoginActivity返回
+			if(resultCode==1){//设置有返回结果
+				if(data!=null){
 					String username=data.getStringExtra("username");
 					tv_name.setText(username);
-					if(username.equals("请登录")){
+					if(username.equals("请登录")){//设置头像时判断，退出登录
 						iv_head.setImageResource(R.drawable.menu_head);
-					}else{
+					}else{//登录
 						//从数据库中读取图片数据
 						if(dao.getBitmap()!=null){
 							iv_head.setImageBitmap(dao.getBitmap());
@@ -150,6 +238,14 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
 							iv_head.setImageResource(R.drawable.myhead);
 						}
 					}
+				}
+			}else{//没有返回结果
+				//从数据库中读取图片数据
+				if(dao.getBitmap()!=null){
+					iv_head.setImageBitmap(dao.getBitmap());
+				}else{
+					//设置默认头像
+					iv_head.setImageResource(R.drawable.myhead);
 				}
 			}
 		}
@@ -191,23 +287,18 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
 				Intent intent0=new Intent(MainActivity.this,MessageActivity.class);
 				startActivity(intent0);
 			break;
-			case 1://分类
-				Intent intent1=new Intent(MainActivity.this,ClassifyActivity.class);
+			case 1://我的收藏
+				Intent intent1=new Intent(MainActivity.this,CollectionActivity.class);
 				startActivity(intent1);
 				break;
-				
-			case 2://我的收藏
-				Intent intent2=new Intent(MainActivity.this,CollectionActivity.class);
-				startActivity(intent2);
-				break;
-			case 3://主题换肤
+			case 2://主题换肤
 				Toast.makeText(MainActivity.this, "敬请期待. . .",Toast.LENGTH_SHORT).show();
 				break;
-			case 4://设置
-				Intent intent4=new Intent(MainActivity.this,SettingsActivity.class);
-				startActivity(intent4);
+			case 3://设置
+				Intent intent3=new Intent(MainActivity.this,SettingsActivity.class);
+				startActivity(intent3);
 				break;
-			case 5://退出
+			case 4://退出
 				showExitDialog();
 				break;
 		}

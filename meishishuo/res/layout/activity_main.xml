@@ -6,11 +6,51 @@
     android:layout_height="match_parent"
     tools:context="com.ngu.meishishuo.activity.MainActivity">
 
-    <FrameLayout
-        android:id="@+id/main_container"
+    <!-- 内容 -->
+    <RelativeLayout 
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    </FrameLayout>
+        android:layout_height="match_parent"
+        >  
+		<FrameLayout
+	       android:id="@+id/main_content"
+	       android:layout_width="match_parent"
+	       android:layout_height="match_parent"
+	       android:layout_above="@+id/radiogroup_bottom">
+		</FrameLayout>
+		<!-- 底部标签 -->
+		<RadioGroup
+	        android:id="@+id/radiogroup_bottom"
+	        android:layout_width="match_parent"  
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentBottom="true"
+	        android:gravity="center"
+	        android:orientation="horizontal" >  
+	        <RadioButton
+	            android:id="@+id/rb_everyday"
+	            style="@style/myRadioGroupStyle"
+	            android:padding="10dp"
+	            android:gravity="center"
+	           	android:checked="true"
+	           	android:background="@color/blue"
+	            android:text="精选" />
+	        <RadioButton
+	            android:id="@+id/rb_find"
+	            style="@style/myRadioGroupStyle"
+	            android:padding="10dp"
+	            android:gravity="center"
+	            android:background="@color/blue"
+	            android:text="发现" />
+	        <RadioButton
+	            android:id="@+id/rb_rank"
+	            style="@style/myRadioGroupStyle"
+	            android:padding="10dp"
+	            android:gravity="center"
+	            android:background="@color/blue"
+	            android:text="排行" />
+    	</RadioGroup> 
+	</RelativeLayout>
+	
+	<!-- 抽屉菜单 -->
     <RelativeLayout
         android:id="@+id/left"
         android:layout_width="match_parent"

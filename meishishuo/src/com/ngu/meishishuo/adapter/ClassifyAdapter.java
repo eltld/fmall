@@ -63,7 +63,8 @@ public class ClassifyAdapter extends BaseAdapter{
 		
 		hold.textView=(TextView) convertView.findViewById(R.id.classify_item_tv);
 		
-		hold.textView.setText(classifyList.get(position).getName());
+		hold.textView.setText("#"+classifyList.get(position).getName());
+		//hold.textView.setBackgroundResource(R.drawable.bg_classify);
 		return convertView;
 	}
 	private class ViewHolder{

@@ -1,11 +1,14 @@
 package com.ngu.meishishuo.fragment;
 
 import java.io.File;
-import java.util.HashMap;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
 
 import com.ngu.meishishuo.R;
-import com.ngu.meishishuo.utils.PictureDAO;
+import com.ngu.meishishuo.utils.ImageDao;
 import com.ngu.meishishuo.utils.SettingsUtil;
 import com.ngu.meishishuo.utils.UserInfoUtil;
 
@@ -13,10 +16,8 @@ import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -43,10 +44,7 @@ public class UserInfoFragment extends Fragment {
 	private TextView tv_name,tv_mail,tv_signature;
 	private Button logout;//退出登录
 	private String info=null;//保存修改后的信息
-	private PictureDAO dao;//图片存取对象
-	//設定圖片的儲存位置，以及檔名
-    private  File tmpFile = new File(Environment.getExternalStorageDirectory(), "image.jpg");
-    private Uri outputFileUri = Uri.fromFile(tmpFile);
+	private ImageDao dao;//图片存取对象
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// 
@@ -63,7 +61,7 @@ public class UserInfoFragment extends Fragment {
 	}
 	//初始化控件
 	private void InitView(View view){
-		dao=new PictureDAO(getActivity());
+		dao=new ImageDao(getActivity());
 		head=(RelativeLayout) view.findViewById(R.id.userinfo_rl_head);
 		//头像
 		headImage=(ImageView) view.findViewById(R.id.userinfo_imageview_head);
@@ -102,15 +100,13 @@ public class UserInfoFragment extends Fragment {
 				    	if(which==0){
 				    		//拍照
 			                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);  
-			                intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE); 
-			              
-			                intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
 			                startActivityForResult(intent, 1);
 			                
 				    	}
 				    	else if(which==1){
 				    		//选择照片			                
-			                Intent intent = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);  
+			                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+			                intent.setType("image/*");
 			                startActivityForResult(intent, 2);  
 				    	}
 				        dialog.dismiss();  
@@ -128,6 +124,7 @@ public class UserInfoFragment extends Fragment {
 				SettingsUtil.set(getActivity(), SettingsUtil.IS_LOGIN, false);
 				Intent intent=new Intent();
 				intent.putExtra("username", "请登录");
+				//设置结果码
 				getActivity().setResult(1,intent);//resultCode=1
 				//退出当前activity
 				getActivity().finish();
@@ -231,34 +228,114 @@ public class UserInfoFragment extends Fragment {
 		//
 		super.onActivityResult(requestCode, resultCode, data);
 		//拍照
-		if (requestCode == 1 && resultCode == getActivity().RESULT_OK){
-			Bitmap bmp = BitmapFactory.decodeFile(outputFileUri.getPath()); //利用BitmapFactory去取得剛剛拍照的圖像
-			headImage.setImageBitmap(bmp);
-			if(dao.getBitmap()!=null){
-				dao.update(bmp);//更新数据库
-			}else{
-				dao.saveBitmap(bmp);//保存
+		if (requestCode == 1 ){
+			if(data==null){
+				return;
 			}
+			Bundle extras=data.getExtras();
+			if(extras!=null){
+				Bitmap bmp = extras.getParcelable("data");
+				Uri uri=saveBitmap(bmp);
+				//图像裁剪
+				startImageZoom(uri);
+			}
+			
 		}
 		//选择图片
-		 else if (requestCode == 2 && resultCode == getActivity().RESULT_OK && null != data) {
-			Uri selectedImage = data.getData();
-			String[] filePathColumn = { MediaStore.Images.Media.DATA };
-			Cursor cursor = getActivity().getContentResolver().query(selectedImage,
-					filePathColumn, null, null, null);
-			cursor.moveToFirst();
-			int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-			String picturePath = cursor.getString(columnIndex);
-			cursor.close();
-			Bitmap bmp=BitmapFactory.decodeFile(picturePath);
-			headImage.setImageBitmap(bmp);
-			if(dao.getBitmap()!=null){
-				dao.update(bmp);//更新数据库
+		 else if (requestCode == 2) {
+			if(data==null){
+				return;
 			}else{
-				dao.saveBitmap(bmp);//保存
+				Uri uri = data.getData();
+				Uri fileUri=convertUri(uri);
+				//图像裁剪
+				startImageZoom(fileUri);
 			}
 		}
+		//图片裁剪
+		 else if(requestCode==3){
+			 if(data==null){
+				 return ;
+				
+			 }else{
+				 Bundle extras=data.getExtras();
+				 if(extras!=null){
+					 Bitmap bmp = extras.getParcelable("data");
+					 headImage.setImageBitmap(bmp);
+					 //如果图片不存在则保存到数据库，否则更新保存的头像
+					 if(dao.getBitmap()==null){
+						 dao.saveBitmap(bmp);
+					 }else{
+						 dao.update(bmp);
+					 }
+				 }
+			 }
+		 }
+	}
+	
+	/**
+	 * 将content类型uri转换为file类型uri
+	 * @param uri content uri
+	 * @return file uri
+	 */
+	private Uri convertUri(Uri uri){
+		InputStream is=null;
+		try {
+			is=getActivity().getContentResolver().openInputStream(uri);
+			Bitmap bmp=BitmapFactory.decodeStream(is);
+			is.close();
+			return saveBitmap(bmp);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
 		
+	}
+	
+	/**
+	 * 保存图片到sd卡
+	 * @param bm
+	 * @return 图片 file uri
+	 */
+	private Uri saveBitmap(Bitmap bm){
+		//注意不要忘了‘/’
+		File tmpDir=new File(Environment.getExternalStorageDirectory()+"/com.ngu.meishishuo");
+		if(!tmpDir.exists()){
+			tmpDir.mkdir();
+		}
+		File img=new File(tmpDir.getAbsolutePath()+"/head.png");
+		try {
+			FileOutputStream fos=new FileOutputStream(img);
+			bm.compress(Bitmap.CompressFormat.PNG, 100, fos);
+			fos.flush();
+			return Uri.fromFile(img);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+	
+	/**
+	 * 图片裁剪
+	 * @param uri file uri
+	 */
+	private void  startImageZoom(Uri uri){
+		Intent intent=new Intent("com.android.camera.action.CROP");
+		intent.setDataAndType(uri, "image/*");
+		intent.putExtra("crop", "true");
+		intent.putExtra("aspectX", 1);
+		intent.putExtra("aspectY", 1);
+		intent.putExtra("outputX", 150);
+		intent.putExtra("outputY", 150);
+		intent.putExtra("return-data", true);
+		startActivityForResult(intent, 3);
 	}
 	
 }

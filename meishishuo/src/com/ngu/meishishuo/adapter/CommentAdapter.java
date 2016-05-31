@@ -65,6 +65,7 @@ public class CommentAdapter extends BaseAdapter{
 		hold.tv_name=(TextView) convertView.findViewById(R.id.comment_textview_name);
 		hold.tv_time=(TextView) convertView.findViewById(R.id.comment_textview_time);
 		hold.tv_content=(TextView) convertView.findViewById(R.id.comment_textview_content);
+		hold.tv_praise=(TextView) convertView.findViewById(R.id.comment_textview_praise);
 		
 		hold.imageview.setImageResource(R.drawable.myhead);
 		hold.tv_name.setText(list.get(position).getName());
@@ -75,6 +76,6 @@ public class CommentAdapter extends BaseAdapter{
 	
 	private class ViewHolder {
 		public ImageView imageview;
-		public TextView tv_name,tv_time,tv_content;
+		public TextView tv_name,tv_time,tv_content,tv_praise;
 	}
 }

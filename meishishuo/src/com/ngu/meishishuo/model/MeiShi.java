@@ -11,10 +11,24 @@ public class MeiShi {
 	private String keywords;//关键字
 	private String message;//资讯内容
 	private String count ;//访问次数
-
+	private String fcount;//收藏数
+	private String rcount;//评论读数
 	public MeiShi() {
 		
 	}
+	public String getFcount() {
+		return fcount;
+	}
+	public void setFcount(String fcount) {
+		this.fcount = fcount;
+	}
+	public String getRcount() {
+		return rcount;
+	}
+	public void setRcount(String rcount) {
+		this.rcount = rcount;
+	}
+
 	public String getId() {
 		return id;
 	}

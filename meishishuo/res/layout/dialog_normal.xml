@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
         android:clickable="true"
-        android:background="@color/white"
+        android:background="@drawable/bg_layout_shape"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -32,7 +30,7 @@
         <View
             android:layout_width="240dp"
             android:layout_height="1dp"
-            android:background="@color/white" />
+            android:background="@color/background" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,13 +46,13 @@
                 android:textColor="@color/black"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="40dp"
+                android:layout_height="60dp"
                 android:background="@drawable/btn_selector"
                 android:gravity="center"
                 android:text="ok" />
             <View
 	            android:layout_width="1dp"
-	            android:layout_height="40dp"
+	            android:layout_height="60dp"
 	            android:background="@color/background" />
 
             <Button

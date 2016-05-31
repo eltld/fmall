@@ -14,11 +14,11 @@ import org.json.JSONObject;
 
 import com.ngu.meishishuo.R;
 import com.ngu.meishishuo.adapter.CommentAdapter;
+import com.ngu.meishishuo.model.Collection;
 import com.ngu.meishishuo.model.Comment;
 import com.ngu.meishishuo.model.MeiShi;
-import com.ngu.meishishuo.utils.CommentDao;
-import com.ngu.meishishuo.utils.AllUrl;
 import com.ngu.meishishuo.utils.MeiShiDao;
+import com.ngu.meishishuo.utils.AllUrl;
 import com.ngu.meishishuo.utils.NetUtil;
 import com.ngu.meishishuo.utils.SettingsUtil;
 import com.ngu.meishishuo.utils.UserInfoUtil;
@@ -46,6 +46,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -55,6 +56,7 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -73,8 +75,8 @@ public class DetailActivity extends Activity implements OnItemClickListener{
 	private List<Comment> commentList;
 	private CommentAdapter commentAdapter;
 	private EditText et_comment;
-	private MeiShiDao dao;
-	private CommentDao commentdao;
+	private TextView tv_collect;//收藏
+	private MeiShiDao dao;//数据库访问对象
 	private MeiShi meishi;
 	private DisplayImageOptions options;//imageloader选项
 	private boolean noImage=false;//无图模式
@@ -107,8 +109,7 @@ public class DetailActivity extends Activity implements OnItemClickListener{
 	}
 	@SuppressWarnings("deprecation")
 	public void initView(){
-		dao=new MeiShiDao(DetailActivity.this,MeiShiDao.DATABASE_NAME);
-		commentdao=new CommentDao(DetailActivity.this, CommentDao.DATABASE_NAME);
+		dao=new MeiShiDao(DetailActivity.this);
 		actionBar=getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		//不显示图标
@@ -120,17 +121,18 @@ public class DetailActivity extends Activity implements OnItemClickListener{
 		rg_mid=(RadioGroup) findViewById(R.id.radiogroup_mid);
 		rb_detail=(RadioButton) findViewById(R.id.rb_detail);
 		rb_comment=(RadioButton) findViewById(R.id.rb_comment);
-		//
+		tv_collect=(TextView) findViewById(R.id.detail_btn_collect);
+		//详情view
 		LayoutInflater inflater=getLayoutInflater();
 		View detail_webview=inflater.inflate(R.layout.detail_webview, null);
 		mWebView=(WebView)detail_webview.findViewById(R.id.detail_webview);
-		//
+		//评论view
 		View detail_comment=inflater.inflate(R.layout.detail_comment, null);
 		commentListView=(ListView) detail_comment.findViewById(R.id.listview_comment);
 		send=(ImageView) detail_comment.findViewById(R.id.imageview_comment_send);
 		et_comment=(EditText) detail_comment.findViewById(R.id.edittext_comment);
 		//评论列表
-		commentList=commentdao.queryAll(commentdao.COMMENTS_TABLE);
+		commentList=dao.queryAllComment();
 		commentAdapter=new CommentAdapter(DetailActivity.this, commentList);
 		commentListView.setAdapter(commentAdapter);
 		commentListView.setOnItemClickListener(this);
@@ -151,7 +153,7 @@ public class DetailActivity extends Activity implements OnItemClickListener{
 						com.setTime(sdf.format(new Date()).toString());
 						com.setContent(content);
 						commentList.add(com);
-						commentdao.insert(com);
+						dao.insertToComment(com);
 						commentAdapter.notifyDataSetChanged();
 						et_comment.setText("");
 					}else{
@@ -233,6 +235,22 @@ public class DetailActivity extends Activity implements OnItemClickListener{
 				 }
 			}
 		});
+		tv_collect.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// 
+				Collection colle=new Collection();
+		 		colle.setName(meishi.getName());
+		 		colle.setDescription(meishi.getDescription());
+		 		colle.setId(meishi.getId());
+		 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		 		colle.setTime(sdf.format(new Date()).toString());
+		 		dao.insertToCollection(colle);
+		 		Toast.makeText(DetailActivity.this,"\""+colle.getName()+"\"已收藏", Toast.LENGTH_SHORT).show();
+		 		
+			}
+		});
 	}
 	//评论列表点击操作
 	@Override
@@ -259,10 +277,6 @@ public class DetailActivity extends Activity implements OnItemClickListener{
 		switch (item.getItemId()) {
 	 	case android.R.id.home://点击左上角图标返回
 	 		finish();
-	 		break;
-	 	case R.id.menu_collect://收藏
-	 		dao.insert(meishi,MeiShiDao.COLLECTION_TABLE);
-	 		Toast.makeText(DetailActivity.this,"\""+meishi.getName()+"\"已收藏", Toast.LENGTH_SHORT).show();
 	 		break;
 	 	case R.id.menu_share://分享
 	 		Intent intent = new Intent(Intent.ACTION_SEND); // 启动分享发送的属性
@@ -296,6 +310,8 @@ public class DetailActivity extends Activity implements OnItemClickListener{
 			super.onPostExecute(result);
 			meishi=result;
 			actionBar.setTitle(result.getName());
+			//优先加载缓存
+			mWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 			mWebView.getSettings().setDefaultTextEncodingName("UTF-8");
 			mWebView.loadData(result.getMessage(), "text/html; charset=UTF-8", null);//这种写法可以正确解码
 			//加载图片
@@ -370,6 +386,7 @@ public class DetailActivity extends Activity implements OnItemClickListener{
 					JSONObject jsonObject=new JSONObject(result);
 					item.setName(jsonObject.getString("name"));
 					item.setId(jsonObject.getString("id"));
+					item.setDescription(jsonObject.getString("description"));
 					item.setImg(jsonObject.getString("img"));
 					item.setMessage(jsonObject.getString("message"));
 		    	}catch(Exception e){

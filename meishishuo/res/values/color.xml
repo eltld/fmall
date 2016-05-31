@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- 设置页面描边颜色 -->
-    <color name="background">#f1f1f1</color><!-- 背景色 -->
+    <color name="background">#e6e6e6</color><!-- 背景色 -->
     <color name="black">#000000</color><!-- 文字颜色 -->
-    <color name="white">#ffffff</color><!--  -->
-    <color name="blue">#a9b7b7</color><!-- app主色调 -->
+    <color name="classify">#11cd6e</color><!-- 分类背景 -->
+    <color name="white">#ffffff</color><!-- 白色 -->
+    <color name="blue">#00bb9c</color><!-- app主色调 -->
 </resources>

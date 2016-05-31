@@ -3,36 +3,29 @@ package com.ngu.meishishuo.adapter;
 import java.util.List;
 
 import com.ngu.meishishuo.R;
-import com.ngu.meishishuo.customview.MyDialog;
-import com.ngu.meishishuo.model.MeiShi;
-import com.ngu.meishishuo.utils.MeiShiDao;
 
-import android.app.AlertDialog.Builder;
+import com.ngu.meishishuo.model.Collection;
+
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class CollectionAdapter extends BaseAdapter {
-	private List<MeiShi> list;
+	private List<Collection> list;
 	private Context context;
-	private MeiShiDao dao;
-	public CollectionAdapter(List<MeiShi> list, Context context,MeiShiDao dao) {
+	public CollectionAdapter(List<Collection> list, Context context) {
 		super();
 		this.list = list;
 		this.context = context;
-		this.dao=dao;
 	}
 
 	
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
+		// 
 		if(list!=null)
 		{
 			return list.size();
@@ -42,7 +35,7 @@ public class CollectionAdapter extends BaseAdapter {
 
 	@Override
 	public Object getItem(int position) {
-		// TODO Auto-generated method stub
+		// 
 		if(list!=null)
 		{
 			return list.get(position);
@@ -52,13 +45,13 @@ public class CollectionAdapter extends BaseAdapter {
 
 	@Override
 	public long getItemId(int position) {
-		// TODO Auto-generated method stub
+		// 
 		return position;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
+		// 
 		ViewHolder hold;
 		if (convertView == null) {
 			hold = new ViewHolder();
@@ -70,13 +63,16 @@ public class CollectionAdapter extends BaseAdapter {
 		}
 		
 		hold.tv_name=(TextView) convertView.findViewById(R.id.tv_collection_name);
-		
-		MeiShi item=list.get(position);
-		hold.tv_name.setText(item.getName());
+		hold.tv_description=(TextView) convertView.findViewById(R.id.tv_collection_description);
+		hold.tv_time=(TextView) convertView.findViewById(R.id.tv_collection_time);
 
+		Collection item=list.get(position);
+		hold.tv_name.setText(item.getName());
+		hold.tv_description.setText(item.getDescription());
+		hold.tv_time.setText(item.getTime());
 		return convertView;
 	}
 	private class ViewHolder{
-		public TextView tv_name;
+		public TextView tv_name,tv_description,tv_time;
 	}
 }

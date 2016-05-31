@@ -1,6 +1,7 @@
 package com.ngu.meishishuo.activity;
 
 import com.ngu.meishishuo.R;
+import com.ngu.meishishuo.utils.DataCleanManager;
 import com.ngu.meishishuo.utils.SettingsUtil;
 
 import android.app.ActionBar;
@@ -47,7 +48,8 @@ public class SettingsActivity extends Activity {
 			public void onClick(View v) {
 				// 
 				Toast.makeText(SettingsActivity.this, "缓存已清除！", Toast.LENGTH_SHORT).show();
-				
+				DataCleanManager.cleanExternalCache(SettingsActivity.this);
+				DataCleanManager.cleanInternalCache(SettingsActivity.this);
 			}
 		});
 		//关于

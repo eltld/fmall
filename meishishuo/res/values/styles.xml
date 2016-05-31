@@ -48,15 +48,13 @@
     <style name="meishi_text_style">
         <item name="android:textColor">@color/black</item>
     </style>
-   <!-- 详情页radiobutton样式 -->
+   <!-- radiobutton样式 -->
      <style name="myRadioGroupStyle">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:gravity">center</item>
-        <item name="android:padding">5dp</item>
         <item name="android:button">@null</item>
         <item name="android:singleLine">true</item>
     </style>

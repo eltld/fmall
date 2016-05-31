@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
     android:orientation="vertical" >
  <GridView 
         android:id="@+id/classify_gv"
@@ -11,8 +10,8 @@
         android:gravity="center"
         android:numColumns="2"    
         android:stretchMode="columnWidth"
-        android:verticalSpacing="5dp"
-        android:horizontalSpacing="5dp"
+        android:verticalSpacing="2dp"
+        android:horizontalSpacing="2dp"
         ></GridView>
 
 </LinearLayout>

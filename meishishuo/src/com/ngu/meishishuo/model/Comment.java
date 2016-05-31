@@ -5,7 +5,14 @@ public class Comment {
 	private String time;//时间
 	private String name;//用户名
 	private String content;//评论内容
+	private String praise;//赞数
 	private long _id;//数据库id
+	public String getPraise() {
+		return praise;
+	}
+	public void setPraise(String praise) {
+		this.praise = praise;
+	}
 	public long get_id() {
 		return _id;
 	}

@@ -12,12 +12,15 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.ngu.meishishuo.R;
+import com.ngu.meishishuo.activity.ClassifyActivity;
 import com.ngu.meishishuo.adapter.ClassifyAdapter;
 import com.ngu.meishishuo.model.MeiShi;
 import com.ngu.meishishuo.utils.AllUrl;
 import com.ngu.meishishuo.utils.MeiShiDao;
 import com.ngu.meishishuo.utils.NetUtil;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -30,6 +33,10 @@ import android.widget.GridView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
+/**
+ * @author zhoufeng06@qq.com
+ * 分类
+ */
 public class ClassifyFragment extends Fragment implements OnItemClickListener {
 	private GridView mGridView;
 	private MeiShiDao dao;
@@ -40,8 +47,8 @@ public class ClassifyFragment extends Fragment implements OnItemClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 		// 
 		super.onCreate(savedInstanceState);
-		dao=new MeiShiDao(getActivity(), MeiShiDao.DATABASE_NAME);
-		classifyList=dao.queryAll(MeiShiDao.CLASSIFY_TABLE);
+		dao=new MeiShiDao(getActivity());
+		classifyList=dao.queryAllClassify();
 		
 	}
 	
@@ -69,9 +76,11 @@ public class ClassifyFragment extends Fragment implements OnItemClickListener {
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		//分类列表点击事件监听
 		if(NetUtil.isNetworkAvailable(getActivity())){
-			FragmentTransaction beginTransaction=getFragmentManager().beginTransaction();
-			MeiShiFragment fragment=new MeiShiFragment(classifyList.get(position).getId(),classifyList.get(position).getName());
-			beginTransaction.replace(R.id.login_container, fragment).commit();
+			//
+			Intent intent=new Intent(getActivity(),ClassifyActivity.class);
+			intent.putExtra("ID", classifyList.get(position).getId());
+			intent.putExtra("NAME", classifyList.get(position).getName());
+			startActivity(intent);
 		}else{
 			Toast.makeText(getActivity(), "网络不可用，请检查网络设置！", Toast.LENGTH_SHORT).show();
 		}
@@ -80,7 +89,11 @@ public class ClassifyFragment extends Fragment implements OnItemClickListener {
 	 * 异步任务获取分类列表
 	 */
 	public class ClassifyAsyncTask extends AsyncTask<String,Void,List<MeiShi> >{
-
+		@Override
+		protected void onPreExecute() {
+			//
+			super.onPreExecute();
+		}
 		@Override
 		protected List<MeiShi> doInBackground(String... params) {
 			
@@ -89,12 +102,11 @@ public class ClassifyFragment extends Fragment implements OnItemClickListener {
 
 		@Override
 		protected void onPostExecute(List<MeiShi> result) {
-			
 			classifyList=result;
 			//保存到本地
 			for(int i=0;i<result.size();i++)
 			{
-				dao.insert(result.get(i), MeiShiDao.CLASSIFY_TABLE);
+				dao.insertToClassify(result.get(i));
 			}
 			mGridView.setAdapter(new ClassifyAdapter(getActivity(),result));
 			super.onPostExecute(result);
@@ -102,7 +114,6 @@ public class ClassifyFragment extends Fragment implements OnItemClickListener {
 
 		@Override
 		protected void onProgressUpdate(Void... values) {
-			
 			super.onProgressUpdate(values);
 		}
 	}

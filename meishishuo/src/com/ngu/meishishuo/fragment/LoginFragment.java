@@ -63,6 +63,7 @@ public class LoginFragment extends Fragment {
 					//将登录用户名回传给MainActivity
 					Intent intent=new Intent();
 					intent.putExtra("username", username);
+					//设置结果码，返回mainactivity
 					getActivity().setResult(1,intent);//resultCode=1
 					//退出当前activity
 					getActivity().finish();

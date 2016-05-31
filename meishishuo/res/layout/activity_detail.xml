@@ -9,14 +9,21 @@
     <ImageView
         android:id="@+id/detail_imageView_meishi"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:scaleType="center"
         android:src="@drawable/loading" />
     
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
     <RadioGroup
         android:id="@+id/radiogroup_mid"
-        android:layout_width="match_parent"  
+        android:layout_width="0dp"  
         android:layout_height="wrap_content"
+        android:layout_weight="2"
         android:gravity="center"
         android:background="@color/white"
         android:orientation="horizontal" >  
@@ -25,17 +32,33 @@
             style="@style/myRadioGroupStyle"
            	android:checked="true"
            	android:background="@drawable/radiobutton_selector"
+           	android:drawableLeft="@drawable/detail"
             android:text="详情" />
         <RadioButton
             android:id="@+id/rb_comment"
             style="@style/myRadioGroupStyle"
             android:background="@drawable/radiobutton_selector"
+            android:drawableLeft="@drawable/item_comment"
             android:text="评论" />
-    </RadioGroup> 
+    </RadioGroup>
+    <TextView 
+        android:id="@+id/detail_btn_collect"
+        android:background="@drawable/mid_layout_selector"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:text="@string/Menu_Collect"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:drawableLeft="@drawable/menu_collect"
+        />
+    </LinearLayout>
      <android.support.v4.view.ViewPager
          android:id="@+id/viewpager_content"
          android:layout_width="match_parent"
-         android:layout_height="wrap_content" >
+         android:layout_height="0dp" 
+         android:layout_weight="2">
     </android.support.v4.view.ViewPager>
    
 </LinearLayout>

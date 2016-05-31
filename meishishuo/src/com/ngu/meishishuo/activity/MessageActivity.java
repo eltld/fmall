@@ -25,15 +25,14 @@ public class MessageActivity extends Activity {
 		//不显示图标
 		actionBar.setDisplayShowHomeEnabled(true);
 		actionBar.setTitle("我的消息");
-		 tabHost = (TabHost) this.findViewById(R.id.TabHost01);  
+		 tabHost = (TabHost) this.findViewById(R.id.message_TabHost);  
          tabHost.setup();  
            
          tabHost.addTab(tabHost.newTabSpec("tab_1")  
-                 .setContent(R.id.LinearLayout1).setIndicator("@我"));  
+                 .setContent(R.id.LinearLayout1).setIndicator("评论"));  
+ 
          tabHost.addTab(tabHost.newTabSpec("tab_2")  
-                 .setContent(R.id.LinearLayout2).setIndicator("评论"));  
-         tabHost.addTab(tabHost.newTabSpec("tab_3")  
-                 .setContent(R.id.LinearLayout3).setIndicator("通知"));  
+                 .setContent(R.id.LinearLayout2).setIndicator("通知"));  
          tabHost.setCurrentTab(1);
 	}
 	@Override

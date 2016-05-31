@@ -13,5 +13,5 @@ public class AllUrl {
 	//图片路径
 	public static final String imageUrl="http://tnfs.tngou.net/image";
 	//图片尺寸
-	public static final String imageSize="_320x240";
+	public static final String imageSize="_360x240";
 }

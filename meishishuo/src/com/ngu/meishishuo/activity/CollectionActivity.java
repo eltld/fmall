@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.ngu.meishishuo.R;
 import com.ngu.meishishuo.adapter.CollectionAdapter;
-import com.ngu.meishishuo.model.MeiShi;
+import com.ngu.meishishuo.model.Collection;
 import com.ngu.meishishuo.utils.MeiShiDao;
 import com.ngu.meishishuo.utils.NetUtil;
 
@@ -30,7 +30,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class CollectionActivity extends Activity {
 	
 	private ActionBar actionBar;
-	private List<MeiShi> list;
+	private List<Collection> list;
 	private MeiShiDao dao;
 	private ListView mListView;
 	private CollectionAdapter adapter;
@@ -40,9 +40,9 @@ public class CollectionActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_collection);
 		initView();
-		dao=new MeiShiDao(getApplicationContext(),MeiShiDao.DATABASE_NAME);
-		list=dao.queryAll(MeiShiDao.COLLECTION_TABLE);
-		adapter = new CollectionAdapter(list,CollectionActivity.this,dao);
+		dao=new MeiShiDao(CollectionActivity.this);
+		list=dao.queryAllCollection();
+		adapter = new CollectionAdapter(list,CollectionActivity.this);
 		mListView.setAdapter(adapter);
 		initEvent();
 	}

@@ -1,65 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:padding="5dp"
-    android:background="@color/white"
-    android:orientation="vertical" >
+    android:layout_height="140dp"
+    android:gravity="center_vertical"
+    android:background="@drawable/bg_layout_shape"
+    >
 
     <ImageView
         android:id="@+id/item_meishi_imageview"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/loading" />
-
-    <TextView
-        android:id="@+id/item_meishi_textview_name"
-        style="@style/meishi_text_style"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:textSize="18sp"
-        />
-
-    <TextView
-        android:id="@+id/item_meishi_textview_keywords"
-        style="@style/meishi_text_style"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxLines="2"
-       	android:textSize="16sp"
-        />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="130dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="4dp"
         android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:scaleType="center"
+        android:src="@drawable/loading" />
+    
+	    <TextView
+	        android:id="@+id/item_meishi_textview_name"
+	        style="@style/meishi_text_style"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@id/item_meishi_imageview"
+	        android:layout_marginLeft="5dp"
+	        android:layout_marginTop="10dp"
+	        android:singleLine="true"
+	        android:textSize="18sp"
+	        android:text="菜名"
+	        />
+	
+	    <TextView
+	        android:id="@+id/item_meishi_textview_description"
+	        style="@style/meishi_text_style"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	         android:layout_toRightOf="@id/item_meishi_imageview"
+	         android:layout_below="@id/item_meishi_textview_name"
+	        android:layout_marginLeft="5dp"
+	        android:layout_marginTop="5dp"
+	        android:maxLines="3"
+	       	android:textSize="16sp"
+	       	android:text="描述"
+	        />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/item_meishi_imageview"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
          >
 
         <TextView
             android:id="@+id/item_meishi_textview_count"
             style="@style/meishi_text_style"
+			android:layout_alignParentLeft="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:gravity="center"
             android:text="@string/history_see"
-            android:layout_alignParentLeft="true"
             android:drawableLeft="@drawable/history_see"
-            android:textSize="13sp"
+            android:textSize="14sp"
             />
 
         <TextView
-            android:id="@+id/item_meishi_textview_collect"
+            android:id="@+id/item_meishi_textview_comment"
             style="@style/meishi_text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:gravity="center"
-            android:text="@string/Menu_Collect"
+            android:text="评论"
             android:layout_alignParentRight="true"
-            android:drawableLeft="@drawable/item_like"
-            android:textSize="13sp"/>
+            android:drawableLeft="@drawable/item_comment"
+            android:textSize="14sp"/>
 		
     </RelativeLayout>
-</LinearLayout>
+</RelativeLayout>

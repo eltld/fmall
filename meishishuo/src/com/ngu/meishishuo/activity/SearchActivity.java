@@ -59,7 +59,7 @@ public class SearchActivity extends Activity implements OnItemClickListener{
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		//不显示图标
 		actionBar.setDisplayShowHomeEnabled(true);
-		actionBar.setTitle("搜索");
+		actionBar.setTitle("发现");
 		listview=(ListView) findViewById(R.id.search_listview);
 		listview.setOnItemClickListener(this);
 		tv_info=(TextView) findViewById(R.id.search_info);

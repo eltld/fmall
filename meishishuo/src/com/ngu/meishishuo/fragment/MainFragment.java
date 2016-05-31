@@ -16,11 +16,11 @@ import com.ngu.meishishuo.activity.DetailActivity;
 import com.ngu.meishishuo.adapter.MainGridViewAdapter;
 import com.ngu.meishishuo.customview.HeaderGridView;
 import com.ngu.meishishuo.customview.MyImageTopView;
+import com.ngu.meishishuo.fragment.MeiShiFragment.MeiShiAsyncTask;
 import com.ngu.meishishuo.model.MeiShi;
 import com.ngu.meishishuo.utils.AllUrl;
 import com.ngu.meishishuo.utils.NetUtil;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -31,8 +31,10 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 
@@ -40,7 +42,12 @@ public class MainFragment extends Fragment implements OnItemClickListener{
 	private MyImageTopView mTopView;// 自定义控件，用于显示上方图片的容器
 	private LinearLayout mBottomView;// 显示下方圆圈的容器（线性布局）
 	private HeaderGridView mHeadGridView;
+	private View headerView;//图片轮播
+	private FrameLayout framelayout;//网络错误时显示
+	private LinearLayout ll_loading;//正在加载
+	private RelativeLayout rl_loading_error;//加载失败
 	private List<MeiShi> resultList;
+	private MainGridViewAdapter myAdapter;//数据适配器
 	private String httpArg="id=0&rows=8&page=1";
 	private int[] imgIds = new int[] { R.drawable.meishi_jiaozi, R.drawable.meishi_kongxincai, R.drawable.meishi_nuomijuan,R.drawable.meishi_tudousi};
 	public ImageView[] imgViews = new ImageView[imgIds.length];//下方圆点的个数
@@ -56,23 +63,53 @@ public class MainFragment extends Fragment implements OnItemClickListener{
 		// 
 		View view=inflater.inflate(R.layout.fragment_main, container,false);
 		mHeadGridView=(HeaderGridView) view.findViewById(R.id.mGridView);
-		View headerView=inflater.inflate(R.layout.fragment_main_header,container,false);
+		headerView=inflater.inflate(R.layout.fragment_main_header,container,false);
 		mBottomView = (LinearLayout) headerView.findViewById(R.id.mBottomView);
 		mTopView = (MyImageTopView) headerView.findViewById(R.id.mTopView);
 		initBottom();// 初始化底部的圆圈，默认第一个为选中
 		mTopView.initImages(imgIds);//初始化要显示的图片
 		mTopView.setBottomImageViews(imgViews);//
-		mHeadGridView.addHeaderView(headerView);
+		//
+		framelayout=(FrameLayout) view.findViewById(R.id.fragment_meishi_framelayout);
+		ll_loading=(LinearLayout) view.findViewById(R.id.ll_loading);
+		rl_loading_error=(RelativeLayout) view.findViewById(R.id.rl_loading_error);
+		//
 		mHeadGridView.setOnItemClickListener(this);
+		resultList=new ArrayList<MeiShi>();
+		myAdapter=new MainGridViewAdapter(getContext(),resultList);
+		//该方法必须在setadapter前调用
+		mHeadGridView.addHeaderView(headerView);
+		mHeadGridView.setAdapter(myAdapter);
 		if(NetUtil.isNetworkAvailable(getActivity())){
 			new MeiShiAsyncTask().execute(AllUrl.listUrl,httpArg);
 		}
 		else{
+			//显示网络错误界面
+			framelayout.setVisibility(View.VISIBLE);
+			rl_loading_error.setVisibility(view.VISIBLE);
 			Toast.makeText(getActivity(), "网络不可用，请检查网络设置！", Toast.LENGTH_SHORT).show();
 		}
+		initEvent();
 		return view;
 	}
-	
+	private void initEvent(){
+		//点击屏幕重新加载
+		rl_loading_error.setOnClickListener(new OnClickListener() {
+					
+			@Override
+			public void onClick(View v) {
+			if(NetUtil.isNetworkAvailable(getActivity())){
+					//建立异步任务加载数据
+					new MeiShiAsyncTask().execute(AllUrl.listUrl,httpArg);
+					//隐藏loading_error
+					rl_loading_error.setVisibility(View.GONE);
+					//显示loading
+					ll_loading.setVisibility(View.VISIBLE);
+				}
+						
+			}
+		});
+	}
 	public void initBottom() {// 初始化底部的小圆圈，并为圆圈添加单击事件处理	
 		for (int i = 0; i < imgViews.length; i++) {
 			imgViews[i] = new ImageView(getActivity());//创建ImageView显示圆圈
@@ -122,26 +159,26 @@ public class MainFragment extends Fragment implements OnItemClickListener{
 	 */
 	public class MeiShiAsyncTask extends AsyncTask<String, Void, List<MeiShi>>
 	{
-		private ProgressDialog dialog;
 		@Override
 		protected void onPreExecute() {
 			// 
-			dialog = ProgressDialog.show(getContext(), "提示", "正在加载. . .");
 			super.onPreExecute();
 		}
 
 		@Override
 		protected void onPostExecute(List<MeiShi> result) {
 			super.onPostExecute(result);
-			dialog.dismiss();
-			resultList=result;
-			mHeadGridView.setAdapter(new MainGridViewAdapter(getContext(),resultList));
+			//更新界面
+			resultList.addAll(result);
+			myAdapter.notifyDataSetChanged();
+			//隐藏framelayout,loading
+			framelayout.setVisibility(View.GONE);
+			ll_loading.setVisibility(View.GONE);
 			}
 
 		@Override
 		protected void onProgressUpdate(Void... values) {
 			super.onProgressUpdate(values);
-			 dialog.setCancelable(true);
 		}
 
 		@Override

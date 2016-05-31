@@ -2,13 +2,17 @@ package com.ngu.meishishuo.activity;
 
 import com.ngu.meishishuo.R;
 import com.ngu.meishishuo.fragment.ClassifyFragment;
+import com.ngu.meishishuo.fragment.MeiShiFragment;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 /**
  * @author zhoufeng06@qq.com
@@ -18,6 +22,7 @@ import android.view.MenuItem;
 public class ClassifyActivity extends FragmentActivity{
 	
 	private ActionBar actionBar;
+	private View loadingView,loadingErrorView;//网络变化时显示的view
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,8 +39,15 @@ public class ClassifyActivity extends FragmentActivity{
 		//显示icon图标,才能设置返回图标
 		actionBar.setDisplayShowHomeEnabled(true);
 		actionBar.setTitle("健康食谱分类");
+		//
+		LayoutInflater inflater=getLayoutInflater();
+		loadingView=inflater.inflate(R.layout.loading,null);
+		loadingErrorView=inflater.inflate(R.layout.loading_error,null);
+		
+		//
+		Intent intent=getIntent();
 		FragmentTransaction beginTransaction=getSupportFragmentManager().beginTransaction();
-		ClassifyFragment fragment=new ClassifyFragment();
+		MeiShiFragment fragment=new MeiShiFragment(intent.getStringExtra("ID"),intent.getStringExtra("NAME"));
 		beginTransaction.replace(R.id.login_container, fragment).commit();
 		}
 	

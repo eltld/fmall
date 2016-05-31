@@ -29,7 +29,7 @@ public class NetErrorFragment extends Fragment {
 				// 
 				if(NetUtil.isNetworkAvailable(getActivity())){
 					MainFragment fragment=new MainFragment();
-					getFragmentManager().beginTransaction().replace(R.id.main_container,fragment).commit();
+					getFragmentManager().beginTransaction().replace(R.id.main_content,fragment).commit();
 				}
 			}
 		});
