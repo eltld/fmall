@@ -96,7 +96,7 @@
                     android:layout_height="wrap_content"  
                     android:clickable="true"  
                     android:text="已阅读并同意《美食说服务条款》"  
-                    android:textColor="@color/blue" />  
+                    android:textColor="#ab56e4" />  
             </LinearLayout>  
 	<Button 
 	    android:id="@+id/btn_register"
@@ -109,6 +109,6 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/btn_selector"
         android:text="注册账号"
-        android:textColor="@color/black"/>
+        android:textColor="#ffffff"/>
    
 </RelativeLayout>

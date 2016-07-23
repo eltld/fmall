@@ -9,7 +9,7 @@
          android:layout_height="80dp"
          android:layout_centerHorizontal="true"
          android:layout_marginTop="20dp"
-         android:src="@drawable/myhead"
+         android:src="@drawable/menu_head"
          >
      </ImageView>
     <LinearLayout 
@@ -88,7 +88,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/btn_selector"
         android:text="登录"
-        android:textColor="@color/black"/>
+        android:textColor="#ffffff"/>
 	<Button 
 	    android:id="@+id/btn_register_now"
 	    android:layout_width="match_parent"
@@ -100,7 +100,7 @@
         android:layout_marginTop="20dp"
         android:background="@color/background"
         android:text="没有账号？立即注册"
-        android:textColor="@color/blue"
+        android:textColor="#ab56e4"
 	    />
    
 </RelativeLayout>

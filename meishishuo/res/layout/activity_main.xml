@@ -22,31 +22,47 @@
 	        android:id="@+id/radiogroup_bottom"
 	        android:layout_width="match_parent"  
 	        android:layout_height="wrap_content"
+	        android:background="#ffffff"
 	        android:layout_alignParentBottom="true"
 	        android:gravity="center"
 	        android:orientation="horizontal" >  
 	        <RadioButton
-	            android:id="@+id/rb_everyday"
+	            android:id="@+id/rb_main"
 	            style="@style/myRadioGroupStyle"
-	            android:padding="10dp"
+	            android:padding="4dp"
 	            android:gravity="center"
 	           	android:checked="true"
-	           	android:background="@color/blue"
+	           	android:drawableTop="@drawable/radiobutton_main_selector"
+	           	android:textColor="#a9b7b7"
+       			android:textSize="12sp"
 	            android:text="精选" />
 	        <RadioButton
 	            android:id="@+id/rb_find"
 	            style="@style/myRadioGroupStyle"
-	            android:padding="10dp"
+	            android:padding="4dp"
 	            android:gravity="center"
-	            android:background="@color/blue"
+	            android:drawableTop="@drawable/radiobutton_find_selector"
+	            android:textColor="#a9b7b7"
+       			android:textSize="12sp"
 	            android:text="发现" />
 	        <RadioButton
 	            android:id="@+id/rb_rank"
 	            style="@style/myRadioGroupStyle"
-	            android:padding="10dp"
+	            android:padding="4dp"
 	            android:gravity="center"
-	            android:background="@color/blue"
+	            android:drawableTop="@drawable/radiobutton_rank_selector"
+	            android:textColor="#a9b7b7"
+       			android:textSize="12sp"
 	            android:text="排行" />
+	        <RadioButton
+	            android:id="@+id/rb_topic"
+	            style="@style/myRadioGroupStyle"
+	            android:padding="4dp"
+	            android:gravity="center"
+	            android:drawableTop="@drawable/radiobutton_topic_selector"
+	            android:textColor="#a9b7b7"
+       			android:textSize="12sp"
+	            android:text="话题" />
     	</RadioGroup> 
 	</RelativeLayout>
 	
@@ -57,14 +73,14 @@
         android:layout_height="match_parent"
         android:layout_gravity="left"
         android:layout_marginRight="40dp"
-        style="@style/drawer_background_style"
+        android:background="#ffffff"
         >
         <RelativeLayout 
         	android:id="@+id/rl_head"
         	android:layout_width="match_parent"
         	android:layout_height="100dp"
         	android:padding="10dp"
-        	android:background="@drawable/btn_selector"
+        	android:background="@color/actionbar_color"
         	android:clickable="true">
 		 		<ImageView
 			        android:id="@+id/iv_head"
@@ -80,7 +96,8 @@
 	        		 android:layout_height="wrap_content"
 					 android:layout_toRightOf="@id/iv_head"
       				 android:layout_centerVertical="true"
-	        		 style="@style/drawer_text_style"
+	        		 android:textColor="#ffffff"
+	        		 android:textSize="18sp"
 	        		 android:text="@string/LeftMenu_LoginHead"
 			         /> 
 		</RelativeLayout>
@@ -89,8 +106,8 @@
             android:layout_below="@id/rl_head"
             android:layout_width="match_parent"
             android:layout_height="match_parent" 
-    		android:choiceMode="singleChoice" 
-   			style="@style/drawer_background_style"
+    		android:choiceMode="singleChoice"
+    		android:background="@color/white"
    			android:dividerHeight="2dp" 
    			android:divider="@color/white"
             >

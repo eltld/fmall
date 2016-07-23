@@ -5,7 +5,12 @@
           android:title="@string/Menu_Search"  
           android:orderInCategory="90"
           android:icon="@drawable/search"  
-          android:showAsAction="always"         
+          android:showAsAction="ifRoom"         
           />
-	
+	<item android:id="@+id/menu_add"  
+          android:title="@string/Menu_Add"  
+          android:orderInCategory="100"
+          android:icon="@drawable/add"  
+          android:showAsAction="ifRoom"         
+          />
 </menu>

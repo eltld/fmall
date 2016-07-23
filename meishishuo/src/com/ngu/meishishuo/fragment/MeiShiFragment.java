@@ -14,7 +14,7 @@ import org.json.JSONObject;
 import com.ngu.meishishuo.R;
 import com.ngu.meishishuo.activity.DetailActivity;
 import com.ngu.meishishuo.adapter.MeiShiAdapter;
-import com.ngu.meishishuo.model.MeiShi;
+import com.ngu.meishishuo.bean.MeiShi;
 import com.ngu.meishishuo.utils.AllUrl;
 import com.ngu.meishishuo.utils.NetUtil;
 
@@ -128,6 +128,9 @@ public class MeiShiFragment extends Fragment implements OnItemClickListener{
 		@Override
 		protected void onPreExecute() {
 			// 
+			framelayout.setVisibility(View.VISIBLE);
+			//显示loading
+			ll_loading.setVisibility(View.VISIBLE);
 			super.onPreExecute();
 		}
 		
@@ -145,6 +148,7 @@ public class MeiShiFragment extends Fragment implements OnItemClickListener{
 		@Override
 		protected void onProgressUpdate(Void... values) {
 			super.onProgressUpdate(values);
+			
 			
 		}
 

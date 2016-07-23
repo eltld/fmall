@@ -3,7 +3,7 @@ package com.ngu.meishishuo.adapter;
 import java.util.List;
 
 import com.ngu.meishishuo.R;
-import com.ngu.meishishuo.model.Comment;
+import com.ngu.meishishuo.bean.Comment;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -20,8 +20,8 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
  */
 public class RankFragment extends Fragment{
 	private RadioGroup rg_top;//顶部标签
-	private RadioButton rb_week,rb_month,rb_all;//周，月，总排行
-	private MeiShiFragment weekfragment,monthfragment,allfragment;
+	private RadioButton rb_month,rb_all;//周，月，总排行
+	private MeiShiFragment monthfragment,allfragment;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -39,14 +39,13 @@ public class RankFragment extends Fragment{
 	}
 	private void initView(View v){
 		rg_top=(RadioGroup) v.findViewById(R.id.radiogroup_top);
-		rb_week=(RadioButton) v.findViewById(R.id.rb_week);
 		rb_month=(RadioButton) v.findViewById(R.id.rb_month);
 		rb_all=(RadioButton) v.findViewById(R.id.rb_all);
 		FragmentManager fragmentmanager=getFragmentManager();
 		FragmentTransaction beginTransaction = fragmentmanager.beginTransaction();
-		weekfragment=new MeiShiFragment("64","首页");
-		rb_week.setTextColor(getActivity().getResources().getColor(R.color.white));
-		beginTransaction.add(R.id.rank_container, weekfragment,"week");
+		monthfragment=new MeiShiFragment("65","首页");
+		rb_month.setTextColor(getActivity().getResources().getColor(R.color.white));
+		beginTransaction.add(R.id.rank_container, monthfragment,"month");
 		beginTransaction.commit();
 	}
 	private void initEvent(){
@@ -59,37 +58,14 @@ public class RankFragment extends Fragment{
 				FragmentTransaction beginTransaction = fragmentmanager.beginTransaction();
 				
 				switch (checkedId) {
-				case R.id.rb_week://周排行
-					//设置文字颜色
-					rb_week.setTextColor(getResources().getColor(R.color.white));
-					rb_month.setTextColor(getResources().getColor(R.color.black));
-					rb_all.setTextColor(getResources().getColor(R.color.black));
-					//
-					weekfragment=(MeiShiFragment) fragmentmanager.findFragmentByTag("week");	
-					beginTransaction.show(weekfragment);
-					if(allfragment!=null){
-						beginTransaction.hide(allfragment);
-					}
-					if(monthfragment!=null){
-						beginTransaction.hide(monthfragment);
-					}
-					beginTransaction.commit();
-					break;
 
 				case R.id.rb_month://月排行
 					//设置文字颜色
-					rb_week.setTextColor(getResources().getColor(R.color.black));
 					rb_month.setTextColor(getResources().getColor(R.color.white));
 					rb_all.setTextColor(getResources().getColor(R.color.black));
 					monthfragment=(MeiShiFragment) fragmentmanager.findFragmentByTag("month");
-					if(monthfragment==null){
-						monthfragment=new MeiShiFragment("65","首页");
-						beginTransaction.add(R.id.rank_container, monthfragment,"month");
-						
-					}
 					//
 					beginTransaction.show(monthfragment);
-					beginTransaction.hide(weekfragment);
 					if(allfragment!=null){
 						beginTransaction.hide(allfragment);
 					}
@@ -97,19 +73,17 @@ public class RankFragment extends Fragment{
 					break;
 				case R.id.rb_all://总排行
 					//设置文字颜色
-					rb_week.setTextColor(getResources().getColor(R.color.black));
 					rb_month.setTextColor(getResources().getColor(R.color.black));
 					rb_all.setTextColor(getResources().getColor(R.color.white));
 					//
 					allfragment=(MeiShiFragment) fragmentmanager.findFragmentByTag("all");
 					if(allfragment==null){
-						allfragment=new MeiShiFragment("66","首页");
+						allfragment=new MeiShiFragment("70","首页");
 						beginTransaction.add(R.id.rank_container, allfragment,"all");
 						
 					}
 					//显示allfragment
 					beginTransaction.show(allfragment);
-					beginTransaction.hide(weekfragment);
 					if(monthfragment!=null){
 						beginTransaction.hide(monthfragment);
 					}

@@ -14,12 +14,11 @@ import org.json.JSONObject;
 import com.ngu.meishishuo.R;
 import com.ngu.meishishuo.activity.DetailActivity;
 import com.ngu.meishishuo.adapter.MainGridViewAdapter;
-import com.ngu.meishishuo.customview.HeaderGridView;
-import com.ngu.meishishuo.customview.MyImageTopView;
-import com.ngu.meishishuo.fragment.MeiShiFragment.MeiShiAsyncTask;
-import com.ngu.meishishuo.model.MeiShi;
+import com.ngu.meishishuo.bean.MeiShi;
 import com.ngu.meishishuo.utils.AllUrl;
 import com.ngu.meishishuo.utils.NetUtil;
+import com.ngu.meishishuo.view.MyGridView;
+import com.ngu.meishishuo.view.MyImageTopView;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -35,20 +34,21 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 
 public class MainFragment extends Fragment implements OnItemClickListener{
 	private MyImageTopView mTopView;// 自定义控件，用于显示上方图片的容器
 	private LinearLayout mBottomView;// 显示下方圆圈的容器（线性布局）
-	private HeaderGridView mHeadGridView;
-	private View headerView;//图片轮播
+	private ScrollView mScrollView;
+	private MyGridView mGridView;
 	private FrameLayout framelayout;//网络错误时显示
 	private LinearLayout ll_loading;//正在加载
 	private RelativeLayout rl_loading_error;//加载失败
 	private List<MeiShi> resultList;
 	private MainGridViewAdapter myAdapter;//数据适配器
-	private String httpArg="id=0&rows=8&page=1";
+	private String httpArg="id=0&rows=10&page=1";
 	private int[] imgIds = new int[] { R.drawable.meishi_jiaozi, R.drawable.meishi_kongxincai, R.drawable.meishi_nuomijuan,R.drawable.meishi_tudousi};
 	public ImageView[] imgViews = new ImageView[imgIds.length];//下方圆点的个数
 	
@@ -62,10 +62,10 @@ public class MainFragment extends Fragment implements OnItemClickListener{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// 
 		View view=inflater.inflate(R.layout.fragment_main, container,false);
-		mHeadGridView=(HeaderGridView) view.findViewById(R.id.mGridView);
-		headerView=inflater.inflate(R.layout.fragment_main_header,container,false);
-		mBottomView = (LinearLayout) headerView.findViewById(R.id.mBottomView);
-		mTopView = (MyImageTopView) headerView.findViewById(R.id.mTopView);
+		mScrollView=(ScrollView) view.findViewById(R.id.main_scrollview);
+		mGridView=(MyGridView) view.findViewById(R.id.mGridView);
+		mBottomView = (LinearLayout) view.findViewById(R.id.mBottomView);
+		mTopView = (MyImageTopView) view.findViewById(R.id.mTopView);
 		initBottom();// 初始化底部的圆圈，默认第一个为选中
 		mTopView.initImages(imgIds);//初始化要显示的图片
 		mTopView.setBottomImageViews(imgViews);//
@@ -74,12 +74,11 @@ public class MainFragment extends Fragment implements OnItemClickListener{
 		ll_loading=(LinearLayout) view.findViewById(R.id.ll_loading);
 		rl_loading_error=(RelativeLayout) view.findViewById(R.id.rl_loading_error);
 		//
-		mHeadGridView.setOnItemClickListener(this);
+		mGridView.setOnItemClickListener(this);
 		resultList=new ArrayList<MeiShi>();
 		myAdapter=new MainGridViewAdapter(getContext(),resultList);
 		//该方法必须在setadapter前调用
-		mHeadGridView.addHeaderView(headerView);
-		mHeadGridView.setAdapter(myAdapter);
+		mGridView.setAdapter(myAdapter);
 		if(NetUtil.isNetworkAvailable(getActivity())){
 			new MeiShiAsyncTask().execute(AllUrl.listUrl,httpArg);
 		}
@@ -89,6 +88,7 @@ public class MainFragment extends Fragment implements OnItemClickListener{
 			rl_loading_error.setVisibility(view.VISIBLE);
 			Toast.makeText(getActivity(), "网络不可用，请检查网络设置！", Toast.LENGTH_SHORT).show();
 		}
+
 		initEvent();
 		return view;
 	}
@@ -140,18 +140,14 @@ public class MainFragment extends Fragment implements OnItemClickListener{
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		//
-		if(position<2){
-			
-		}
-		else{
 			if(NetUtil.isNetworkAvailable(getActivity())){
 				Intent intent=new Intent(getActivity(),DetailActivity.class);
-				intent.putExtra("ID", resultList.get(position-2).getId());
+				intent.putExtra("ID", resultList.get(position).getId());
 				startActivity(intent);
 			}else{
 				Toast.makeText(getActivity(), "网络不可用，请检查网络设置！", Toast.LENGTH_SHORT).show();
 			}
-		}
+
 	}
 	/*
 	 * 异步加载数据
@@ -163,6 +159,9 @@ public class MainFragment extends Fragment implements OnItemClickListener{
 		protected void onPreExecute() {
 			// 
 			super.onPreExecute();
+			framelayout.setVisibility(View.VISIBLE);
+			//显示loading
+			ll_loading.setVisibility(View.VISIBLE);
 		}
 
 		@Override
@@ -179,6 +178,7 @@ public class MainFragment extends Fragment implements OnItemClickListener{
 		@Override
 		protected void onProgressUpdate(Void... values) {
 			super.onProgressUpdate(values);
+			
 		}
 
 		@Override

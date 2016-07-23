@@ -3,7 +3,7 @@ package com.ngu.meishishuo.adapter;
 import java.util.List;
 
 import com.ngu.meishishuo.R;
-import com.ngu.meishishuo.model.MeiShi;
+import com.ngu.meishishuo.bean.MeiShi;
 import com.ngu.meishishuo.utils.AllUrl;
 import com.ngu.meishishuo.utils.SettingsUtil;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;

@@ -3,8 +3,8 @@ package com.ngu.meishishuo.adapter;
 import java.util.List;
 
 import com.ngu.meishishuo.R;
-
-import com.ngu.meishishuo.model.MeiShi;
+import com.ngu.meishishuo.R.color;
+import com.ngu.meishishuo.bean.MeiShi;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -17,11 +17,20 @@ import android.widget.TextView;
 public class ClassifyAdapter extends BaseAdapter{
 	private Context context;
 	private List<MeiShi> classifyList;
+	private int nowSelectedIndex = 0;
+	
 	public ClassifyAdapter(Context context, List<MeiShi> classifyList) {
 		this.context = context;
 		this.classifyList = classifyList;
 	}
+	public int getNowSelectedIndex() {
+        return nowSelectedIndex;
+    }
 
+    public void setNowSelectedIndex(int nowSelectedIndex) {
+        this.nowSelectedIndex = nowSelectedIndex;
+        this.notifyDataSetChanged();//及时通知显示
+    }
 	@Override
 	public int getCount() {
 		// 
@@ -63,8 +72,12 @@ public class ClassifyAdapter extends BaseAdapter{
 		
 		hold.textView=(TextView) convertView.findViewById(R.id.classify_item_tv);
 		
-		hold.textView.setText("#"+classifyList.get(position).getName());
-		//hold.textView.setBackgroundResource(R.drawable.bg_classify);
+		hold.textView.setText(classifyList.get(position).getName());
+		 if (position == nowSelectedIndex) {
+			 hold.textView.setTextColor(0xFFB3EE3A);
+	        } else {
+	        	hold.textView.setTextColor(0xFF525252);
+	        }
 		return convertView;
 	}
 	private class ViewHolder{

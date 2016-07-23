@@ -1,0 +1,92 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="2dp">
+    <TextView 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:padding="8dp"
+		    android:textSize="14sp"
+		    android:text="菜谱名"
+		    />
+
+        <EditText
+            android:id="@+id/add_et_title" 
+            android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:padding="10dp"
+        	android:singleLine="true"
+        	android:background="@drawable/bg_layout_shape"
+        	android:hint="菜谱的名字"
+        	
+            />
+        <TextView 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:padding="8dp"
+		    android:textSize="14sp"
+		    android:text="食材"
+		    />
+        <EditText
+            android:id="@+id/add_et_food" 
+            android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:padding="10dp"
+        	android:singleLine="true"
+        	android:background="@drawable/bg_layout_shape"
+        	android:hint="用到的食材"
+        	
+            />
+        <TextView 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:padding="8dp"
+		    android:textSize="14sp"
+		    android:text="简介"
+		    />
+		<EditText 
+		    android:id="@+id/add_et_description"
+            android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:padding="10dp"
+        	android:background="@drawable/bg_layout_shape"
+        	android:maxLines="3"
+        	android:hint="简答介绍一下吧"
+        	
+            />
+		<TextView 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:padding="8dp"
+		    android:textSize="14sp"
+		    android:text="做法"
+		    />
+		<EditText
+		    android:id="@+id/add_et_message" 
+            android:layout_width="match_parent"
+        	android:layout_height="100dp"
+        	android:padding="10dp"
+        	android:background="@drawable/bg_layout_shape"
+        	android:singleLine="true"
+        	android:hint="具体的做法"
+        	
+            />
+		<TextView 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:padding="8dp"
+		    android:textSize="14sp"
+		    android:text="上传图片"
+		    />
+		<ImageButton
+		    android:id="@+id/add_ibtn"
+		    android:layout_width="80dp"
+		    android:layout_height="80dp"
+		    android:src="@drawable/icon_add" />
+</LinearLayout>
+</ScrollView>

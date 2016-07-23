@@ -3,7 +3,7 @@ package com.ngu.meishishuo.adapter;
 import java.util.List;
 
 import com.ngu.meishishuo.R;
-import com.ngu.meishishuo.model.LeftMenu;
+import com.ngu.meishishuo.bean.LeftMenu;
 
 import android.content.Context;
 import android.view.LayoutInflater;

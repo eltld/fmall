@@ -14,13 +14,14 @@ import org.json.JSONObject;
 
 import com.ngu.meishishuo.R;
 import com.ngu.meishishuo.adapter.CommentAdapter;
-import com.ngu.meishishuo.model.Collection;
-import com.ngu.meishishuo.model.Comment;
-import com.ngu.meishishuo.model.MeiShi;
+import com.ngu.meishishuo.bean.Collection;
+import com.ngu.meishishuo.bean.Comment;
+import com.ngu.meishishuo.bean.MeiShi;
 import com.ngu.meishishuo.utils.MeiShiDao;
 import com.ngu.meishishuo.utils.AllUrl;
 import com.ngu.meishishuo.utils.NetUtil;
 import com.ngu.meishishuo.utils.SettingsUtil;
+import com.ngu.meishishuo.utils.TimeUtil;
 import com.ngu.meishishuo.utils.UserInfoUtil;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -75,7 +76,6 @@ public class DetailActivity extends Activity implements OnItemClickListener{
 	private List<Comment> commentList;
 	private CommentAdapter commentAdapter;
 	private EditText et_comment;
-	private TextView tv_collect;//收藏
 	private MeiShiDao dao;//数据库访问对象
 	private MeiShi meishi;
 	private DisplayImageOptions options;//imageloader选项
@@ -121,7 +121,6 @@ public class DetailActivity extends Activity implements OnItemClickListener{
 		rg_mid=(RadioGroup) findViewById(R.id.radiogroup_mid);
 		rb_detail=(RadioButton) findViewById(R.id.rb_detail);
 		rb_comment=(RadioButton) findViewById(R.id.rb_comment);
-		tv_collect=(TextView) findViewById(R.id.detail_btn_collect);
 		//详情view
 		LayoutInflater inflater=getLayoutInflater();
 		View detail_webview=inflater.inflate(R.layout.detail_webview, null);
@@ -136,7 +135,6 @@ public class DetailActivity extends Activity implements OnItemClickListener{
 		commentAdapter=new CommentAdapter(DetailActivity.this, commentList);
 		commentListView.setAdapter(commentAdapter);
 		commentListView.setOnItemClickListener(this);
-			final SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 			//评论按钮点击事件监听
 			send.setOnClickListener(new OnClickListener() {
 				
@@ -150,7 +148,7 @@ public class DetailActivity extends Activity implements OnItemClickListener{
 					if(!TextUtils.isEmpty(content)){
 						Comment com=new Comment();
 						com.setName(UserInfoUtil.getUserInfo(DetailActivity.this).get(UserInfoUtil.USERNAME));
-						com.setTime(sdf.format(new Date()).toString());
+						com.setTime(TimeUtil.getCurrentTime());
 						com.setContent(content);
 						commentList.add(com);
 						dao.insertToComment(com);
@@ -194,11 +192,13 @@ public class DetailActivity extends Activity implements OnItemClickListener{
 				// 
 				 switch (arg0) {
 			         case 0:
-			             rb_detail.setChecked(true);
+			        	 rb_detail.setChecked(true);
+			             
+
 			             break;
 			         case 1:
 			        	 rb_comment.setChecked(true);
-			             break;		       
+			        	  break;		       
 			         default:
 			             break;
 				 }
@@ -224,31 +224,20 @@ public class DetailActivity extends Activity implements OnItemClickListener{
 				 switch (checkedId) {
 		         case R.id.rb_detail:
 		             viewpager.setCurrentItem(0);
+		             rb_detail.setTextColor(getResources().getColor(R.color.white));
+		             rb_comment.setTextColor(getResources().getColor(R.color.black));
 		             break;
 		        case R.id.rb_comment:
 		             viewpager.setCurrentItem(1);
+		             rb_detail.setTextColor(getResources().getColor(R.color.black));
+		             rb_comment.setTextColor(getResources().getColor(R.color.white));
+		           
 		             break;
 		    
 		        default:
 		             break;
 				
 				 }
-			}
-		});
-		tv_collect.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// 
-				Collection colle=new Collection();
-		 		colle.setName(meishi.getName());
-		 		colle.setDescription(meishi.getDescription());
-		 		colle.setId(meishi.getId());
-		 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-		 		colle.setTime(sdf.format(new Date()).toString());
-		 		dao.insertToCollection(colle);
-		 		Toast.makeText(DetailActivity.this,"\""+colle.getName()+"\"已收藏", Toast.LENGTH_SHORT).show();
-		 		
 			}
 		});
 	}
@@ -284,6 +273,16 @@ public class DetailActivity extends Activity implements OnItemClickListener{
 	 		String msg = actionBar.getTitle().toString();
 	 		intent.putExtra(Intent.EXTRA_TEXT, msg); // 分享的内容
 	 		startActivity(Intent.createChooser(intent, "选择分享"));// 目标应用选择对话框的标题
+	 		break;
+	 	case R.id.menu_collect://收藏
+	 		Collection colle=new Collection();
+	 		colle.setName(meishi.getName());
+	 		colle.setDescription(meishi.getDescription());
+	 		colle.setId(meishi.getId());
+	 		colle.setTime(TimeUtil.getCurrentTime());
+	 		dao.insertToCollection(colle);
+	 		Toast.makeText(DetailActivity.this,"\""+colle.getName()+"\"已收藏", Toast.LENGTH_SHORT).show();
+	 		break;
         }
 		return super.onOptionsItemSelected(item);
 	}

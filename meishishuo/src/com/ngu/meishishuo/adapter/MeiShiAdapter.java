@@ -1,11 +1,8 @@
 package com.ngu.meishishuo.adapter;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import com.ngu.meishishuo.utils.AllUrl;
-import com.ngu.meishishuo.utils.MeiShiDao;
 import com.ngu.meishishuo.utils.SettingsUtil;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -13,19 +10,17 @@ import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingProgressListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.ngu.meishishuo.R;
-import com.ngu.meishishuo.model.Collection;
-import com.ngu.meishishuo.model.MeiShi;
+import com.ngu.meishishuo.bean.MeiShi;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 /**
  * @author zhoufeng06@qq.com
@@ -121,7 +116,7 @@ public class MeiShiAdapter extends BaseAdapter {
 		hold.tv_name.setText(item.getName());
 		hold.tv_description.setText(item.getDescription());
 		hold.tv_count.setText(item.getCount()+"人浏览");
-		hold.tv_comment.setText("("+item.getRcount()+")");
+		hold.tv_comment.setText(item.getRcount());
 		
 		return convertView;
 	}

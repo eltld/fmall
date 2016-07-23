@@ -13,16 +13,9 @@
 	        android:background="@color/white"
 	        android:orientation="horizontal" >  
 	        <RadioButton
-	            android:id="@+id/rb_week"
-	            style="@style/myRadioGroupStyle"
-	            android:padding="5dp"
-	            android:gravity="center"
-	           	android:checked="true"
-	           	android:background="@drawable/radiobutton_selector"
-	            android:text="周排行" />
-	        <RadioButton
 	            android:id="@+id/rb_month"
 	            style="@style/myRadioGroupStyle"
+	            android:checked="true"
 	            android:padding="5dp"
 	            android:gravity="center"
 	            android:background="@drawable/radiobutton_selector"

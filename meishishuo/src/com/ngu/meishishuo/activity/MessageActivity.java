@@ -30,10 +30,13 @@ public class MessageActivity extends Activity {
            
          tabHost.addTab(tabHost.newTabSpec("tab_1")  
                  .setContent(R.id.LinearLayout1).setIndicator("评论"));  
- 
          tabHost.addTab(tabHost.newTabSpec("tab_2")  
-                 .setContent(R.id.LinearLayout2).setIndicator("通知"));  
-         tabHost.setCurrentTab(1);
+                 .setContent(R.id.LinearLayout2).setIndicator("@我")); 
+         tabHost.addTab(tabHost.newTabSpec("tab_3")  
+                 .setContent(R.id.LinearLayout3).setIndicator("私信"));   
+         tabHost.addTab(tabHost.newTabSpec("tab_4")  
+                 .setContent(R.id.LinearLayout4).setIndicator("通知"));  
+         tabHost.setCurrentTab(2);//私信
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

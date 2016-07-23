@@ -7,10 +7,9 @@
 <TextView
     android:gravity="center"
     android:textColor="@color/white"
-    android:background="@color/classify"
     android:padding="10dp"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_height="wrap_content"
     android:textSize="20sp"
     android:id="@+id/classify_item_tv"
     android:text="名称"

@@ -3,9 +3,10 @@ package com.ngu.meishishuo.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ngu.meishishuo.model.Collection;
-import com.ngu.meishishuo.model.Comment;
-import com.ngu.meishishuo.model.MeiShi;
+import com.ngu.meishishuo.bean.Collection;
+import com.ngu.meishishuo.bean.Comment;
+import com.ngu.meishishuo.bean.MeiShi;
+import com.ngu.meishishuo.bean.Topic;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -34,7 +35,11 @@ public class MeiShiDao {
 	public static final String COMMENT_TABLE="comments";
 	//创建评论表的SQL语句
 	private static final String COMMENT_TABLE_CREATE="CREATE TABLE "+COMMENT_TABLE+"(_id INTEGER PRIMARY KEY AUTOINCREMENT,name VARCHAR(20),time VARCHAR(10),content VARCHAR(20))";
-	
+	//话题
+    public static final String TOPIC_TABLE="topics";
+	//创建话题表的SQL语句
+    private static final String TOPIC_TABLE_CREATE="CREATE TABLE "+TOPIC_TABLE+"(_id INTEGER PRIMARY KEY AUTOINCREMENT,name VARCHAR(20),time VARCHAR(10),content VARCHAR(20))";
+
 	//构造函数
 	public MeiShiDao(Context context){
 		helper=new MyHelper(context);
@@ -231,6 +236,67 @@ public class MeiShiDao {
 		return list;
 	}
 	/**
+	 * 增加一条数据到话题表
+	 * @param topic 话题
+	 */
+	public void insertToTopic (Topic topic)
+	{
+		//获取一个可写的sqldatabase对象
+		SQLiteDatabase db=helper.getWritableDatabase();
+		ContentValues values=new ContentValues();
+		values.put("name", topic.getName());
+		values.put("time", topic.getTime());
+		values.put("content", topic.getContent());
+		long _id=db.insert(TOPIC_TABLE, null, values);
+		topic.set_id(_id);
+		db.close();
+	}
+	/**
+	 * 更新话题表中的数据
+	 * @param topic 话题
+	 * @return
+	 */
+	public int updateTopic(Topic topic)
+	{
+		
+		SQLiteDatabase db=helper.getWritableDatabase();
+		ContentValues values=new ContentValues();
+		values.put("name",topic.getName());
+		values.put("time", topic.getTime());
+		values.put("content", topic.getContent());
+		int count=db.update(TOPIC_TABLE, values, "_id=?", new String[]{topic.get_id()+""});
+		db.close();
+		return count;
+	}
+	/**
+	 * 查询话题表中的数据
+	 * @return
+	 */
+	public List<Topic> queryAllTopic()
+	{
+		SQLiteDatabase db=helper.getWritableDatabase();
+		Cursor c=db.query(TOPIC_TABLE, null, null, null, null, null,null); 
+		List<Topic> list=new ArrayList<Topic>();
+		Topic item;
+		while(c.moveToNext())
+		{
+			//
+			item=new Topic();
+			long _id=c.getLong(c.getColumnIndex("_id"));
+			String name=c.getString(c.getColumnIndex("name"));
+			String time=c.getString(c.getColumnIndex("time"));
+			String content=c.getString(c.getColumnIndex("content"));
+			item.set_id(_id);
+			item.setName(name);
+			item.setTime(time);
+			item.setContent(content);
+			list.add(item);
+		}
+		c.close();
+		db.close();
+		return list;
+	}
+	/**
 	 * 根据id删除对应数据
 	 * @param _id 数据库中id
 	 * @param tableName 表名
@@ -271,6 +337,7 @@ public class MeiShiDao {
 				db.execSQL(CLASSIFY_TABLE_CREATE);
 				db.execSQL(COLLECTION_TABLE_CREATE);
 				db.execSQL(COMMENT_TABLE_CREATE);
+				db.execSQL(TOPIC_TABLE_CREATE);
 			
 		}
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

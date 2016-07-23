@@ -1,27 +1,16 @@
 package com.ngu.meishishuo.fragment;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import com.ngu.meishishuo.R;
 import com.ngu.meishishuo.activity.ClassifyActivity;
 import com.ngu.meishishuo.adapter.ClassifyAdapter;
-import com.ngu.meishishuo.model.MeiShi;
-import com.ngu.meishishuo.utils.AllUrl;
-import com.ngu.meishishuo.utils.MeiShiDao;
-import com.ngu.meishishuo.utils.NetUtil;
+import com.ngu.meishishuo.bean.MeiShi;
 
-import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -29,26 +18,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.GridView;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
 
 /**
  * @author zhoufeng06@qq.com
  * 分类
  */
 public class ClassifyFragment extends Fragment implements OnItemClickListener {
-	private GridView mGridView;
-	private MeiShiDao dao;
-	private List<MeiShi> classifyList;
-	private String httpArg="id=0";//请求参数
-	
+	private ListView pListView,cListView;
+	private List<List<MeiShi>> cListList;
+	private List<MeiShi> pList,cList;
+	private ClassifyAdapter pAdapter;
+	private ChildClassifyAdpter cAdapter;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// 
 		super.onCreate(savedInstanceState);
-		dao=new MeiShiDao(getActivity());
-		classifyList=dao.queryAllClassify();
 		
 	}
 	
@@ -56,118 +45,173 @@ public class ClassifyFragment extends Fragment implements OnItemClickListener {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// 
 		View view =inflater.inflate(R.layout.fragment_classify, container,false);
-		mGridView=(GridView) view.findViewById(R.id.classify_gv);
-		//设置点击事件监听
-		mGridView.setOnItemClickListener(this);
-		if(classifyList.isEmpty()){//本地为空则从网络加载
-			if(NetUtil.isNetworkAvailable(getActivity())){
-				//网络可用，则建立异步任务加载数据
-				new ClassifyAsyncTask().execute(AllUrl.classifyUrl,httpArg);
-			}else{
-				Toast.makeText(getActivity(), "网络不可用，请检查网络设置！", Toast.LENGTH_SHORT).show();
-			}
-		}else{
-			mGridView.setAdapter(new ClassifyAdapter(getActivity(),classifyList));
-		}
+		pListView=(ListView) view.findViewById(R.id.classify_parent_lv);
+		cListView=(ListView) view.findViewById(R.id.classify_lv);
+		initData();
+		//
+		pAdapter=new ClassifyAdapter(getContext(), pList);
+		pListView.setAdapter(pAdapter);
+		pListView.setOnItemClickListener(this);
+		//
+		cList=new ArrayList<MeiShi>();
+		cAdapter=new ChildClassifyAdpter(getActivity(), cList);
+		cListView.setAdapter(cAdapter);
+		initChild(0);
 		return view;
 	}
 	
+	//父分类条目点击事件
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		//分类列表点击事件监听
-		if(NetUtil.isNetworkAvailable(getActivity())){
-			//
-			Intent intent=new Intent(getActivity(),ClassifyActivity.class);
-			intent.putExtra("ID", classifyList.get(position).getId());
-			intent.putExtra("NAME", classifyList.get(position).getName());
-			startActivity(intent);
-		}else{
-			Toast.makeText(getActivity(), "网络不可用，请检查网络设置！", Toast.LENGTH_SHORT).show();
-		}
+		//
+		pAdapter.setNowSelectedIndex(position);
+		initChild(position);
+		
 	}
-	/*
-	 * 异步任务获取分类列表
-	 */
-	public class ClassifyAsyncTask extends AsyncTask<String,Void,List<MeiShi> >{
-		@Override
-		protected void onPreExecute() {
-			//
-			super.onPreExecute();
+	
+	private void initChild(int position) {
+		//先清除先前增加的子分类
+		if(cList!=null){
+			cList.clear();
 		}
-		@Override
-		protected List<MeiShi> doInBackground(String... params) {
-			
-				return request(params[0],params[1]);
-		}
-
-		@Override
-		protected void onPostExecute(List<MeiShi> result) {
-			classifyList=result;
-			//保存到本地
-			for(int i=0;i<result.size();i++)
-			{
-				dao.insertToClassify(result.get(i));
-			}
-			mGridView.setAdapter(new ClassifyAdapter(getActivity(),result));
-			super.onPostExecute(result);
-		}
-
-		@Override
-		protected void onProgressUpdate(Void... values) {
-			super.onProgressUpdate(values);
-		}
+		cList.addAll(cListList.get(position));
+		
+        cAdapter.notifyDataSetChanged();
+        cListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+          @Override
+          public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            cAdapter.setNowSelectedIndex(position);
+	      	Intent intent=new Intent(getActivity(),ClassifyActivity.class);
+	      	intent.putExtra("ID", cList.get(position).getId());
+	      	intent.putExtra("NAME", cList.get(position).getName());
+	      	startActivity(intent);
+          }
+      });
+       
+   }
+	
+	//初始化分类列表数据
+	private void initData(){
+		//父分类列表
+		pList=new ArrayList<MeiShi>();
+		pList.add(new MeiShi("1","美容"));
+		pList.add(new MeiShi("10","减肥"));
+		pList.add(new MeiShi("15","保健养生"));
+		pList.add(new MeiShi("52","人群"));
+		pList.add(new MeiShi("62","时节"));
+		pList.add(new MeiShi("68","餐时"));
+		pList.add(new MeiShi("82","调养"));
+		pList.add(new MeiShi("132","其他"));
+		//子分类列表
+		cListList=new ArrayList<List<MeiShi>>();
+		cList=new ArrayList<MeiShi>();
+		cList.add(new MeiShi("2","养颜"));
+		cList.add(new MeiShi("4","美白"));
+		cList.add(new MeiShi("7","祛痘"));
+		cList.add(new MeiShi("8","润肤"));
+		cList.add(new MeiShi("9","保湿"));
+		cListList.add(cList);
+		cList=new ArrayList<MeiShi>();
+		cList.add(new MeiShi("11","瘦身"));
+		cList.add(new MeiShi("12","瘦脸"));
+		cList.add(new MeiShi("13","瘦腿"));
+		cList.add(new MeiShi("14","丰胸"));
+		cListList.add(cList);
+		cList=new ArrayList<MeiShi>();
+		cList.add(new MeiShi("16","补钙"));
+		cList.add(new MeiShi("19","润肺"));
+		cList.add(new MeiShi("21","养胃"));
+		cList.add(new MeiShi("37","护眼"));
+		cList.add(new MeiShi("42","解暑"));
+		cList.add(new MeiShi("43","清热"));
+		cListList.add(cList);
+		cList=new ArrayList<MeiShi>();
+		cList.add(new MeiShi("53","宝宝"));
+		cList.add(new MeiShi("54","女性"));
+		cList.add(new MeiShi("58","考生"));
+		cList.add(new MeiShi("59","白领"));
+		cList.add(new MeiShi("61","老年人"));
+		cList.add(new MeiShi("57","男性"));
+		cListList.add(cList);
+		cList=new ArrayList<MeiShi>();
+		cList.add(new MeiShi("63","春天"));
+		cList.add(new MeiShi("64","夏天"));
+		cList.add(new MeiShi("65","秋天"));
+		cList.add(new MeiShi("66","冬天"));
+		cList.add(new MeiShi("67","节日"));
+		cListList.add(cList);
+		cList=new ArrayList<MeiShi>();
+		cList.add(new MeiShi("69","早餐"));
+		cList.add(new MeiShi("70","晚餐"));
+		cList.add(new MeiShi("71","夜宵"));
+		cList.add(new MeiShi("72","睡前"));
+		cList.add(new MeiShi("73","饭前"));
+		cList.add(new MeiShi("74","空腹"));
+		cListList.add(cList);
+		cList=new ArrayList<MeiShi>();
+		cList.add(new MeiShi("85","疲劳"));
+		cList.add(new MeiShi("86","上火"));
+		cList.add(new MeiShi("94","压力大"));
+		cList.add(new MeiShi("96","消化不良"));
+		cList.add(new MeiShi("91","缺钙"));
+		cList.add(new MeiShi("90","气虚"));
+		cListList.add(cList);
+		cList=new ArrayList<MeiShi>();
+		cList.add(new MeiShi("145","中暑"));
+		cList.add(new MeiShi("142","解酒"));
+		cList.add(new MeiShi("144","湿热"));
+		cListList.add(cList);
 	}
-	/**
-	 * 获取json数据
-	 * @param urlAll
-	 *            :请求接口
-	 * @param httpArg
-	 *            :参数
-	 * @return 返回结果
-	 */
-	public  List<MeiShi> request(String httpUrl,String httpArg)
-	{
-		BufferedReader reader = null;
-	    String result = null;
-	    List<MeiShi> resultList = new ArrayList<MeiShi>();
-	    String Url=httpUrl+"?"+httpArg;
-	    StringBuffer sbf = new StringBuffer();
-	    try {
-	        URL url = new URL(Url);
-	        HttpURLConnection connection = (HttpURLConnection) url
-	                .openConnection();
-	        connection.setRequestMethod("GET");
-	        // 填入apikey到HTTP header
-	        //connection.setRequestProperty("apikey",  "your apikey");
-	        connection.connect();
-	        InputStream is = connection.getInputStream();
-	        reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-	        String strRead = null;
-	        while ((strRead = reader.readLine()) != null) {
-	            sbf.append(strRead);
-	            sbf.append("\r\n");
+	//子分类列表数据适配器
+	public class ChildClassifyAdpter extends BaseAdapter {
+
+	    private Context context;
+	    private List<MeiShi> cList;
+	    private int nowSelectedIndex = 0;
+
+	    public ChildClassifyAdpter(Context context, List<MeiShi> cList) {
+	        this.context = context;
+	        this.cList = cList;
+	    }
+
+	    @Override
+	    public int getCount() {
+	        return cList.size();
+	    }
+
+	    @Override
+	    public Object getItem(int position) {
+	        return cList.get(position);
+	    }
+
+	    @Override
+	    public long getItemId(int position) {
+	        return position;
+	    }
+
+	    @Override
+	    public View getView(int position, View convertView, ViewGroup parent) {
+	        if (convertView == null) {
+	            convertView = LayoutInflater.from(context).inflate(R.layout.fragment_classify_item, null);
 	        }
-	        reader.close();
-	        result = sbf.toString();
-	       
-	    } catch (Exception e) {
-	        e.printStackTrace();
+	        TextView tv_list_item = (TextView) convertView.findViewById(R.id.classify_item_tv);
+	        tv_list_item.setText(cList.get(position).getName().toString());
+
+	        if (position == nowSelectedIndex) {
+	            tv_list_item.setTextColor(0xFFB3EE3A);
+	        } else {
+	            tv_list_item.setTextColor(0xFF525252);
+	        }
+	        return  convertView;
 	    }
-	    try {
-	    	MeiShi item;
-			JSONObject jsonObject=new JSONObject(result);
-			JSONArray jsonArray=jsonObject.getJSONArray("tngou");
-			for(int i=0;i<jsonArray.length();i++)
-			{
-				item=new MeiShi();
-				jsonObject =jsonArray.getJSONObject(i);					
-				item.setName(jsonObject.getString("name"));
-				item.setId(jsonObject.getString("id"));
-				resultList.add(item);
-			}
-	    }catch(Exception e){
-	    	e.printStackTrace();
+
+	    public int getNowSelectedIndex() {
+	        return nowSelectedIndex;
 	    }
-	    return resultList;
+
+	    public void setNowSelectedIndex(int nowSelectedIndex) {
+	        this.nowSelectedIndex = nowSelectedIndex;
+	        this.notifyDataSetChanged();//及时通知显示
+	    }
 	}
 }

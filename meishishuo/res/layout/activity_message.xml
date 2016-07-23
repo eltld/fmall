@@ -17,7 +17,34 @@
 			android:layout_height="fill_parent"
 			>
 			<LinearLayout
-			     android:id="@+id/LinearLayout1"
+			    android:id="@+id/LinearLayout1"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:gravity="center">
+				<TextView 
+				    android:text="暂时没有收到评论"
+					android:id="@+id/message_tv_pinglun" 
+					android:gravity="center"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content">
+				</TextView>
+				
+			</LinearLayout>
+			<LinearLayout 
+			    android:id="@+id/LinearLayout2"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:gravity="center">
+				<TextView 
+				    android:text="暂时没有收到@"
+					android:id="@+id/message_tv_atme" 
+					android:gravity="center"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content">
+				</TextView>
+			</LinearLayout>
+			<LinearLayout 
+			    android:id="@+id/LinearLayout3"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:gravity="center">
@@ -27,11 +54,12 @@
 				    android:layout_height="wrap_content"
 				    android:divider="@color/background"
 				    android:dividerHeight="2dp"
-				    ></ListView>
+				    >
+				    
+				</ListView>
 			</LinearLayout>
-			
 			<LinearLayout 
-			    android:id="@+id/LinearLayout2"
+			    android:id="@+id/LinearLayout4"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:gravity="center">

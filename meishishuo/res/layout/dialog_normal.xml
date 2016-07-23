@@ -43,16 +43,16 @@
             <Button
                 android:id="@+id/positiveButton"
                 android:textSize="15sp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="60dp"
-                android:background="@drawable/btn_selector"
+                android:layout_height="40dp"
+                android:background="@color/actionbar_color"
                 android:gravity="center"
                 android:text="ok" />
             <View
 	            android:layout_width="1dp"
-	            android:layout_height="60dp"
+	            android:layout_height="40dp"
 	            android:background="@color/background" />
 
             <Button
@@ -62,7 +62,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="40dp"
-                android:background="@drawable/btn_selector"
+                android:background="@color/background"
                 android:gravity="center"
                 android:text="cancel" />
         </LinearLayout>

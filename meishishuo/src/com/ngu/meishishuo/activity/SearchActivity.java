@@ -14,7 +14,7 @@ import org.json.JSONObject;
 
 import com.ngu.meishishuo.R;
 import com.ngu.meishishuo.adapter.SearchAdapter;
-import com.ngu.meishishuo.model.MeiShi;
+import com.ngu.meishishuo.bean.MeiShi;
 import com.ngu.meishishuo.utils.AllUrl;
 import com.ngu.meishishuo.utils.NetUtil;
 

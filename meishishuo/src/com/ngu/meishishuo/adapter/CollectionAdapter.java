@@ -3,8 +3,7 @@ package com.ngu.meishishuo.adapter;
 import java.util.List;
 
 import com.ngu.meishishuo.R;
-
-import com.ngu.meishishuo.model.Collection;
+import com.ngu.meishishuo.bean.Collection;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -72,6 +71,7 @@ public class CollectionAdapter extends BaseAdapter {
 		hold.tv_time.setText(item.getTime());
 		return convertView;
 	}
+	
 	private class ViewHolder{
 		public TextView tv_name,tv_description,tv_time;
 	}
