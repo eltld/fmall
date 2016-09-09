@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+    
+	   <RelativeLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="10dp"
+	        >
+	
+	        <ImageView
+	            android:id="@+id/pay_iv_close"
+	            android:layout_alignParentRight="true"
+	            android:layout_marginRight="10dp"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:padding="10dp"
+	            android:layout_gravity="center_vertical"
+	            android:src="@drawable/clear_holo_light" />
+	
+	        <TextView
+	            android:id="@+id/popup_tv_price_stock"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:gravity="center"
+	            android:layout_centerInParent="true"
+	            android:layout_gravity="center_vertical"
+	            android:text="付款详情"
+	            android:textColor="@color/tv_Black"
+	            android:textSize="18sp" />
+	
+    </RelativeLayout>
+    
+	     <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/bg_Gray" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                 >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:text="订单信息"
+                    android:textSize="18sp" 
+                    android:textColor="@color/tv_Black"/>
+               
+                <TextView
+                    android:id="@+id/pay_tv_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:text="肥瞄官方旗舰店"
+					android:textSize="18sp"
+                    android:textColor="@color/tv_Black"
+                 	 />
+                
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bg_Gray" />
+	   	
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                 >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:text="付款方式"
+                    android:textSize="18sp" 
+                    android:textColor="@color/tv_Black"/>
+               
+                <TextView
+                    android:id="@+id/pay_tv_way"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:text="余额支付"
+					android:textSize="18sp"
+                    android:textColor="@color/tv_Black"
+                 	 />
+                
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bg_Gray" />
+            
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                 >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:text="需付款"
+                    android:textSize="18sp" 
+                    android:textColor="@color/tv_Black"/>
+               
+                <TextView
+                    android:id="@+id/pay_tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:text="9.89元"
+					android:textSize="20sp"
+                    android:textColor="@color/tv_Black"
+                 	 />
+                
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bg_Gray" />
+            
+            <TextView 
+		        android:id="@+id/pay_ok"
+		        android:layout_width="match_parent"
+		        android:layout_height="48dp"
+		        android:paddingTop="10dp"
+		        android:paddingBottom="10dp"
+		        android:layout_gravity="center"
+		        android:gravity="center"
+		        android:layout_marginTop="100dp"
+		        android:layout_marginBottom="2dp"
+		        android:text="确定"
+		        android:textColor="@color/tv_White"
+		        android:background="@drawable/yuanjiao_red"
+        />
+</LinearLayout>

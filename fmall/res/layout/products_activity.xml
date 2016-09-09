@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:background="@color/white"
+    >
+    <RelativeLayout 
+		        android:layout_width="match_parent"
+		        android:layout_height="48dp"
+		        android:background="#FF5000"
+		        android:orientation="horizontal" >
+		
+		        <TextView
+		            android:id="@+id/iv_top_back"
+		            android:layout_width="wrap_content"
+		            android:layout_height="match_parent"
+		            android:padding="8dp"
+		            android:layout_alignParentLeft="true"
+		            android:gravity="center"
+		            android:text="返回"
+		            android:textColor="#FFFFFF"
+		            android:textSize="18sp"
+		            android:drawableLeft="@drawable/btn_back_selector" />
+				
+		        <TextView
+		            android:id="@+id/tv_top_title"
+		            android:layout_width="wrap_content"
+		            android:layout_height="match_parent"
+		            android:layout_centerHorizontal="true"
+		            android:gravity="center"
+		            android:text="标题"
+		            android:textColor="#FFFFFF"
+		            android:textSize="18sp" />
+		
+		        <ImageView
+		            android:id="@+id/iv_top_more"
+		            android:layout_width="wrap_content"
+		            android:layout_height="match_parent"
+		            android:padding="8dp"
+		            android:layout_alignParentRight="true"
+		            android:src="@drawable/btn_more_selector" />
+		        
+			</RelativeLayout>
+			<ProgressBar 
+			    android:id="@+id/loading_list_progress"
+			    android:layout_width="match_parent"
+			    android:layout_height="2dp"
+			    style="?android:attr/progressBarStyleHorizontal"
+			    android:max="100"
+			    android:progress="5"
+			    android:visibility="invisible"
+			    />
+			<LinearLayout
+			    android:id="@+id/list_ll" 
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:gravity="center_vertical"
+			    >
+			    <TextView
+			        android:id="@+id/list_tv_zonghe"
+			    	android:layout_width="wrap_content"
+			    	android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:gravity="center"
+			    	android:text="综合" 
+			    	android:textSize="18sp"   
+			        />
+			    <TextView 
+			        android:id="@+id/list_tv_xiaoliang"
+			    	android:layout_width="wrap_content"
+			    	android:layout_height="wrap_content"
+			    	android:layout_weight="1"
+			    	android:gravity="center"
+			    	android:text="销量"  
+			    	android:textSize="18sp"     
+			        />
+			    <TextView 
+			        android:id="@+id/list_tv_jiage"
+			    	android:layout_width="wrap_content"
+			    	android:layout_height="wrap_content"
+			    	android:layout_weight="1"
+			    	android:gravity="center"
+			    	android:text="价格"  
+			    	android:textSize="18sp"     
+			        />
+			</LinearLayout>
+	<android.support.v4.widget.SwipeRefreshLayout 
+	    android:id="@+id/swipeRefreshLayout"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    >
+		<android.support.v7.widget.RecyclerView
+	        android:id="@+id/recyclerView"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:scrollbars="vertical" />
+		
+	</android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

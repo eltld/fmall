@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:background="@android:color/white"
+    >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+       
+   <RelativeLayout
+       android:id="@+id/top_bar"
+       android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#FF5000"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/iv_top_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:text="返回"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:drawableLeft="@drawable/btn_back_selector" />
+
+        <TextView
+            android:id="@+id/tv_top_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="抽奖"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/iv_top_more"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/btn_more_selector" />
+        
+	</RelativeLayout>
+        
+        <FrameLayout
+            android:id="@+id/Lottery"
+            android:layout_width="fill_parent"
+            android:layout_height="300dip"
+            >
+            <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/body_panbg"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center"
+                />
+        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center" >
+
+            <Button
+                android:id="@+id/begin_btn"
+                android:background="#ff5000"
+                android:layout_width="100dp"
+                android:layout_height="48dp"
+                android:textColor="#ffffff"
+                android:text="开始" />
+
+            <Button
+                android:id="@+id/end_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/begin_btn"
+                android:text="结束" 
+                android:visibility="gone"/>
+        </RelativeLayout>
+        
+                
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:id="@+id/top_bar" 
+		android:layout_width="match_parent"
+		android:layout_height="48dp"
+		android:background="#FF5000"
+		android:orientation="horizontal" >
+		
+		         <TextView
+		            android:id="@+id/iv_top_back"
+		            android:layout_width="wrap_content"
+		            android:layout_height="match_parent"
+		            android:padding="8dp"
+		            android:layout_alignParentLeft="true"
+		            android:gravity="center"
+		            android:text="返回"
+		            android:textColor="#FFFFFF"
+		            android:textSize="18sp"
+		            android:drawableLeft="@drawable/btn_back_selector" />
+		
+		        <TextView
+		            android:id="@+id/tv_top_title"
+		            android:layout_width="wrap_content"
+		            android:layout_height="match_parent"
+		            android:layout_centerHorizontal="true"
+		            android:gravity="center"
+		            android:text="新增收货地址"
+		            android:textColor="#FFFFFF"
+		            android:textSize="18sp" />
+		
+		        <ImageView
+		            android:id="@+id/iv_top_more"
+		            android:layout_width="wrap_content"
+		            android:layout_height="match_parent"
+		            android:padding="8dp"
+		            android:layout_alignParentRight="true"
+		            android:src="@drawable/btn_more_selector" />
+		        
+			</RelativeLayout>
+		
+   		
+			<RelativeLayout 
+			   
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    >
+			    <EditText
+			         android:id="@+id/addaddress_name"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:hint="收货人姓名(必填)"
+			        
+			        />
+			</RelativeLayout>
+			
+			<RelativeLayout 
+			    
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    >
+			    <EditText
+			        android:id="@+id/addaddress_phone"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:hint="手机号码(必填)"
+			        
+			        />
+			</RelativeLayout>
+			<RelativeLayout 
+			    android:id="@+id/addaddress_city"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:padding="8dp"
+			    >
+			    <TextView
+			        android:id="@+id/addaddress_tv_city"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:layout_alignParentLeft="true"
+			        android:text="省，市，区"
+			        android:textSize="18sp"
+			        android:textColor="@color/tv_Black"
+			        android:drawableRight="@drawable/arrow_right"
+			        />
+			    
+			</RelativeLayout>
+			
+			<RelativeLayout 
+			   
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    >
+			    <EditText
+			         android:id="@+id/addaddress_street"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:hint="街道"
+			        
+			        />
+			</RelativeLayout>
+			
+			<RelativeLayout 
+			    
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    >
+			    <EditText
+			        android:id="@+id/addaddress_mail"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:hint="邮政编码"
+			        
+			        />
+			</RelativeLayout>
+			
+			<RelativeLayout 
+			   
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    >
+			    <EditText
+			         android:id="@+id/addaddress_detail"
+			        android:layout_width="match_parent"
+			        android:layout_height="80dp"
+			        android:hint="详细地址(必填)"
+			        android:singleLine="true"
+			        />
+			</RelativeLayout>
+			
+			<Button
+			    android:id="@+id/addaddress_btn_save"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:padding="10dp" 
+			    android:layout_marginLeft="40dp" 
+			    android:layout_marginRight="40dp"
+			    android:background="@color/red"
+			    android:text="保存"
+			    android:textColor="@color/white"
+			    android:textSize="16sp"
+			    />
+			
+</LinearLayout>

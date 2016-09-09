@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.tmall"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="19" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />  <!-- 震动权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />        <!-- 使用照相机权限 -->
+    <uses-feature android:name="android.hardware.camera.autofocus" />   <!-- 自动聚焦权限 -->
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".FirstActivity"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- 引导页 -->
+        <activity
+            android:name=".WelcomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 登录页 -->
+         <activity
+            android:name="com.example.tmall.user.LoginActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+         <!-- 注册页 -->
+         <activity
+            android:name="com.example.tmall.user.RegisterActivity"
+            android:screenOrientation="portrait">
+        </activity>
+         <!-- 主页 -->
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
+        </activity>
+         <!-- 商品详情页 -->
+         <activity
+            android:name="com.example.tmall.classify.DetailActivity"
+            android:screenOrientation="portrait">
+        </activity>
+         <!-- 订单页 -->
+         <activity
+            android:name=".OrderActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+         <!-- 设置页 -->
+         <activity
+            android:name="com.example.tmall.user.SettingsActivity"
+           android:screenOrientation="portrait">
+        </activity>
+         <!-- 商品列表页 -->
+          <activity
+            android:name="com.example.tmall.classify.ProductsActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+         <!-- 收货地址管理页 -->
+          <activity
+            android:name="com.example.tmall.user.AddressActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+         <!-- 新增收货地址页 -->
+        <activity
+            android:name="com.example.tmall.user.NewAddressActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+         <!-- 反馈建议页 -->
+         <activity
+            android:name="com.example.tmall.user.SuggesstionActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+         <!-- 关于我们页 -->
+         <activity
+            android:name="com.example.tmall.user.AboutActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+         <!-- 浏览器页 -->
+         <activity
+            android:name=".BrowserActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+         <!-- 评论页 -->
+         <activity
+            android:name="com.example.tmall.classify.CommentActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+         <!-- 二维码 -->
+        <activity
+            android:name="com.zxing.activity.CaptureActivity"
+            android:configChanges="orientation|keyboardHidden" 
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <!-- 抽奖 -->
+         <activity
+            android:name="com.example.tmall.user.PrizeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 个人信息-->
+         <activity
+            android:name="com.example.tmall.user.UserInformationActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+          <!-- 订单管理-->
+         <activity
+            android:name="com.example.tmall.user.OrderManagementActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+         <activity 
+            android:name="com.example.tmall.home.ProductsSearchActivity"
+            android:label="@string/app_name" >
+        </activity>
+          <activity 
+            android:name="com.example.tmall.classify.BigPictureActivity"
+            android:label="@string/app_name" 
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+        </activity>
+    </application>
+
+</manifest>

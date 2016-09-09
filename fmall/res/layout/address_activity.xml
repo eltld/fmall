@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <RelativeLayout
+        android:id="@+id/top_bar" 
+		        android:layout_width="match_parent"
+		        android:layout_height="48dp"
+		        android:background="#FF5000"
+		        android:orientation="horizontal" >
+		
+		         <TextView
+		            android:id="@+id/iv_top_back"
+		            android:layout_width="wrap_content"
+		            android:layout_height="match_parent"
+		            android:padding="8dp"
+		            android:layout_alignParentLeft="true"
+		            android:gravity="center"
+		            android:text="返回"
+		            android:textColor="#FFFFFF"
+		            android:textSize="18sp"
+		            android:drawableLeft="@drawable/btn_back_selector" />
+		
+		        <TextView
+		            android:id="@+id/tv_top_title"
+		            android:layout_width="wrap_content"
+		            android:layout_height="match_parent"
+		            android:layout_centerHorizontal="true"
+		            android:gravity="center"
+		            android:text="管理收货地址"
+		            android:textColor="#FFFFFF"
+		            android:textSize="18sp" />
+		
+		        <ImageView
+		            android:id="@+id/iv_top_more"
+		            android:layout_width="wrap_content"
+		            android:layout_height="match_parent"
+		            android:padding="8dp"
+		            android:layout_alignParentRight="true"
+		            android:src="@drawable/btn_more_selector" />
+		        
+			</RelativeLayout>
+    <ListView 
+        android:id="@+id/address_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/address_tv_add"
+        android:layout_below="@+id/top_bar"
+        android:divider="@color/activity_graybg"
+        android:dividerHeight="2dp"
+        >
+        
+    </ListView>
+	<TextView 
+	    android:id="@+id/address_tv_add"
+	    android:background="@color/tv_Red"
+	    android:layout_alignParentBottom="true"
+	    android:layout_width="match_parent"
+	    android:layout_height="48dp"
+	    android:gravity="center"
+	    android:text="新增收货地址"
+	    android:textColor="@color/tv_White"
+	    android:textSize="16sp"
+	    />
+</RelativeLayout>
