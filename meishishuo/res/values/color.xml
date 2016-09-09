@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- 设置页面描边颜色 -->
-    <color name="background">#e6e6e6</color><!-- 背景色 -->
-    <color name="black">#000000</color><!-- 文字颜色 -->
-    <color name="white">#ffffff</color><!-- 白色 -->
-    <color name="actionbar_color">#ff0000</color><!-- app主色调 -->
-    <color name="main_radiobutton_textcolor">#a9b7b7</color>
-</resources>
